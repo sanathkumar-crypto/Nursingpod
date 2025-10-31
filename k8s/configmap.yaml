@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nursingpod-config
+data:
+  redirect-uri: "https://your-domain.com/callback"
+  # Update with your actual domain
+  allowed-domain: "@cloudphysician.net"
+
+
+
+

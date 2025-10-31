@@ -1,0 +1,194 @@
+nohup: ignoring input
+ * Serving Flask app 'app'
+ * Debug mode: on
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.3:5000
+[33mPress CTRL+C to quit[0m
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 119-608-643
+127.0.0.1 - - [30/Oct/2025 11:20:37] "[32mGET / HTTP/1.1[0m" 302 -
+127.0.0.1 - - [30/Oct/2025 11:20:37] "GET /login-page?next=/ HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2025 11:20:39] "[32mGET /login HTTP/1.1[0m" 302 -
+127.0.0.1 - - [30/Oct/2025 11:20:43] "[31m[1mGET /callback?state=rv7dwKbp5gHmjOx3rrRlIbTDWdyWBF&code=4/0Ab32j93Y0Kad0OhxmiKUEBLFin-q1X1cslHdEVU3PqcRWcbU60nnkWf_DuHq_CpCC-tqJA&scope=email+profile+https://www.googleapis.com/auth/userinfo.email+openid+https://www.googleapis.com/auth/userinfo.profile&authuser=0&hd=cloudphysician.net&prompt=none HTTP/1.1[0m" 400 -
+127.0.0.1 - - [30/Oct/2025 11:20:46] "[32mGET /login HTTP/1.1[0m" 302 -
+ * Detected change in '/home/sanath/Nursingpod/app.py', reloading
+OAuth Login - Redirect URI: http://localhost:5000/callback
+OAuth Login - Client ID: 1032805148357-ud0632...
+Generated new state: rv7dwKbp5gHmjOx3rrRl...
+Generated authorization URL (first 100 chars): https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=1032805148357-ud0632ctk62nul4...
+OAuth Login - Redirect URI: http://localhost:5000/callback
+OAuth Login - Client ID: 1032805148357-ud0632...
+Generated new state: dZOQLPKOBNFim9qIGUoV...
+Generated authorization URL (first 100 chars): https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=1032805148357-ud0632ctk62nul4...
+
+=== OAuth Callback Debug ===
+Full callback URL: http://localhost:5000/callback?state=dZOQLPKOBNFim9qIGUoVE75eXgmxBX&code=4/0Ab32j92IPFCd2DK4YiVKs4Bk5TiNAGAaJOeiY0YOugZFIwzb8tXXpZgQwQm3OJp940B-XA&scope=email+profile+https://www.googleapis.com/auth/userinfo.email+https://www.googleapis.com/auth/userinfo.profile+openid&authuser=0&hd=cloudphysician.net&prompt=none
+Redirect URI configured in app: http://localhost:5000/callback
+Code parameter present: True
+State from request: dZOQLPKOBNFim9qIGUoVE75eXgmxBX
+State from session: dZOQLPKOBNFim9qIGUoVE75eXgmxBX
+Error from request (if any): None
+Error description (if any): None
+🔄 Starting token exchange with Google...
+
+=== OAuth Callback Debug ===
+Full callback URL: http://localhost:5000/callback?state=dZOQLPKOBNFim9qIGUoVE75eXgmxBX&code=4/0Ab32j93yx7fL2AYYHa6_PlzvGLVxkQv7G5GjoA76Js3HZftVgDEM6cksAcp8uZ1wuHhWSA&scope=email+profile+https://www.googleapis.com/auth/userinfo.email+https://www.googleapis.com/auth/userinfo.profile+openid&authuser=0&hd=cloudphysician.net&prompt=none
+Redirect URI configured in app: http://localhost:5000/callback
+Code parameter present: True
+State from request: dZOQLPKOBNFim9qIGUoVE75eXgmxBX
+State from session: dZOQLPKOBNFim9qIGUoVE75eXgmxBX
+Error from request (if any): None
+Error description (if any): None
+🔄 Starting token exchange with Google...
+✅ Token exchange completed in 133.35 seconds
+🔄 Verifying ID token and fetching user info...
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 119-608-643
+ * Detected change in '/home/sanath/Nursingpod/app.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 119-608-643
+ * Detected change in '/home/sanath/Nursingpod/app.py', reloading
+ * Restarting with stat
+127.0.0.1 - - [30/Oct/2025 23:10:46] "[31m[1mGET /callback?state=jLyCNfHQMeccLxYJ8kN3t1cUMzeUZS&code=4/0Ab32j91Uot5Ix_xGmBhYW4UZRm2o-oLAkdzU-b406Scmt5W0QvyQz1fWM12evQ4C6TtcrA&scope=email+profile+https://www.googleapis.com/auth/userinfo.email+https://www.googleapis.com/auth/userinfo.profile+openid&authuser=0&hd=cloudphysician.net&prompt=none HTTP/1.1[0m" 400 -
+127.0.0.1 - - [30/Oct/2025 23:10:48] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+127.0.0.1 - - [30/Oct/2025 23:14:29] "[31m[1mGET /callback?state=rG6ikKMHXJgcHwpT0uA7M6A0IPEbbY&code=4/0Ab32j93Io6zlgNCVPluev3jpw-WgFXU4JwXzH8jvddvxPQIwxg4d8GvpRvzuN7zGNYo6Rg&scope=email+profile+https://www.googleapis.com/auth/userinfo.profile+https://www.googleapis.com/auth/userinfo.email+openid&authuser=0&hd=cloudphysician.net&prompt=none HTTP/1.1[0m" 400 -
+127.0.0.1 - - [30/Oct/2025 23:14:38] "[32mGET /login HTTP/1.1[0m" 302 -
+127.0.0.1 - - [30/Oct/2025 23:14:38] "[32mGET /login HTTP/1.1[0m" 302 -
+127.0.0.1 - - [30/Oct/2025 23:14:39] "[32mGET /login HTTP/1.1[0m" 302 -
+127.0.0.1 - - [30/Oct/2025 23:14:49] "[32mGET /callback?state=rgLgrZjyukYardcrDJd8yBgOXsEsbi&code=4/0Ab32j90LynEP_IkBv9paFn6SYFv4C6fQLjEqErnCghntSZBeUAkr-YUz4HsHm3tulEqC4g&scope=email+profile+https://www.googleapis.com/auth/userinfo.email+openid+https://www.googleapis.com/auth/userinfo.profile&authuser=0&hd=cloudphysician.net&prompt=none HTTP/1.1[0m" 302 -
+127.0.0.1 - - [30/Oct/2025 23:15:32] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2025 23:15:32] "GET /static/css/style.css HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2025 23:15:32] "GET /static/js/dashboard.js HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2025 23:15:36] "GET /api/filter?escalation=all&email=all&hospital=all&date=all&exclude_camera=false HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2025 23:15:36] "GET /api/charts?escalation=all&email=all&hospital=all&date=all&exclude_camera=false HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2025 23:15:54] "GET /api/filter?escalation=Camera+Annotation+Events&email=all&hospital=all&date=all&exclude_camera=false HTTP/1.1" 200 -
+127.0.0.1 - - [30/Oct/2025 23:15:55] "GET /api/charts?escalation=Camera+Annotation+Events&email=all&hospital=all&date=all&exclude_camera=false HTTP/1.1" 200 -
+127.0.0.1 - - [31/Oct/2025 00:08:25] "GET /login-page HTTP/1.1" 200 -
+127.0.0.1 - - [31/Oct/2025 00:16:42] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [31/Oct/2025 00:16:42] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+127.0.0.1 - - [31/Oct/2025 00:16:42] "GET /static/js/dashboard.js HTTP/1.1" 200 -
+127.0.0.1 - - [31/Oct/2025 00:16:44] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+127.0.0.1 - - [31/Oct/2025 00:16:45] "GET /api/filter?escalation=all&email=all&hospital=all&date=all&exclude_camera=false HTTP/1.1" 200 -
+127.0.0.1 - - [31/Oct/2025 00:16:47] "GET /api/charts?escalation=all&email=all&hospital=all&date=all&exclude_camera=false HTTP/1.1" 200 -
+127.0.0.1 - - [31/Oct/2025 00:17:03] "GET /api/charts?escalation=Educating+nurses&email=all&hospital=all&date=all&exclude_camera=false HTTP/1.1" 200 -
+127.0.0.1 - - [31/Oct/2025 00:17:03] "GET /api/filter?escalation=Educating+nurses&email=all&hospital=all&date=all&exclude_camera=false HTTP/1.1" 200 -
+127.0.0.1 - - [31/Oct/2025 00:25:43] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [31/Oct/2025 00:25:43] "GET /static/css/style.css HTTP/1.1" 200 -
+127.0.0.1 - - [31/Oct/2025 00:25:43] "GET /static/js/dashboard.js HTTP/1.1" 200 -
+127.0.0.1 - - [31/Oct/2025 00:25:44] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+127.0.0.1 - - [31/Oct/2025 00:25:45] "GET /api/filter?escalation=all&email=all&hospital=all&date=all&exclude_camera=false HTTP/1.1" 200 -
+❌ State mismatch detected!
+   Request state: 'jLyCNfHQMeccLxYJ8kN3t1cUMzeUZS'
+   Session state: 'dZOQLPKOBNFim9qIGUoVE75eXgmxBX'
+   Session keys: ['_permanent', 'oauth_start_time', 'state']
+   OAuth start time: 2025-10-30T11:20:46.081458
+   Time since OAuth start: 42597.2 seconds
+   ⚠️ This appears to be a very old OAuth attempt (42597 seconds ago)
+OAuth Login - Redirect URI: http://localhost:5000/callback
+OAuth Login - Client ID: 1032805148357-ud0632...
+OAuth Login - Redirect URI: http://localhost:5000/callback
+OAuth Login - Client ID: 1032805148357-ud0632...
+Generated new state: 80HcsUcA9MMpDSiln1rt...
+Generated authorization URL (first 100 chars): https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=1032805148357-ud0632ctk62nul4...
+Generated new state: IWSC0lMY4M7drU1LIBoH...
+Generated authorization URL (first 100 chars): https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=1032805148357-ud0632ctk62nul4...
+OAuth Login - Redirect URI: http://localhost:5000/callback
+OAuth Login - Client ID: 1032805148357-ud0632...
+Generated new state: rgLgrZjyukYardcrDJd8...
+Generated authorization URL (first 100 chars): https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=1032805148357-ud0632ctk62nul4...
+
+=== OAuth Callback Debug ===
+Full callback URL: http://localhost:5000/callback?state=rgLgrZjyukYardcrDJd8yBgOXsEsbi&code=4/0Ab32j90LynEP_IkBv9paFn6SYFv4C6fQLjEqErnCghntSZBeUAkr-YUz4HsHm3tulEqC4g&scope=email+profile+https://www.googleapis.com/auth/userinfo.email+openid+https://www.googleapis.com/auth/userinfo.profile&authuser=0&hd=cloudphysician.net&prompt=none
+Redirect URI configured in app: http://localhost:5000/callback
+Code parameter present: True
+State from request: rgLgrZjyukYardcrDJd8yBgOXsEsbi
+State from session: rgLgrZjyukYardcrDJd8yBgOXsEsbi
+Error from request (if any): None
+Error description (if any): None
+🔄 Starting token exchange with Google...
+✅ Token exchange completed in 3.10 seconds
+🔄 Verifying ID token and fetching user info...
+✅ ID token verification completed in 2.54 seconds
+✅ User authenticated: sanath.kumar@cloudphysician.net (Dr. Sanath Kumar)
+✅ Login successful, redirecting to dashboard...
+
+DEBUG: get_monthly_data called with escalation='all', exclude_camera=False
+DEBUG: Branch: 'all' - will query all sources
+
+=== API CHARTS DEBUG ===
+Received params - escalation: 'all' (type: str, length: 3), email: 'all', hospital: 'all...', date: 'all', exclude_camera: False
+Escalation comparison - == 'all': True, == 'Camera Annotation Events': False, == 'Impact Cases': False, != 'all': False
+DEBUG: api_charts - Branch: else (escalation='all')
+
+DEBUG: get_monthly_data called with escalation='all', exclude_camera=False
+DEBUG: Branch: 'all' - will query all sources
+DEBUG: Monthly data has 16 escalation types: ['Impact Cases', 'Drop in GCS', 'Educating nurses', 'Gasping', 'Glycemic abnormality', 'Lab abnormality', 'Level 4 patients moved to ICU services', 'Lines and infusion syringes not labelled', 'Nursing care', 'Position not changed', 'Ventilator Alarm - Suctioning', 'Vitals abnormality', 'Issues', 'Jerky movement', 'Medication error', 'Camera Annotation Events']
+DEBUG: Chart will display 16 escalation types: ['Camera Annotation Events', 'Drop in GCS', 'Educating nurses', 'Gasping', 'Glycemic abnormality', 'Impact Cases', 'Issues', 'Jerky movement', 'Lab abnormality', 'Level 4 patients moved to ICU services', 'Lines and infusion syringes not labelled', 'Medication error', 'Nursing care', 'Position not changed', 'Ventilator Alarm - Suctioning', 'Vitals abnormality']
+
+=== API CHARTS DEBUG ===
+Received params - escalation: 'Camera Annotation Events' (type: str, length: 24), email: 'all', hospital: 'all...', date: 'all', exclude_camera: False
+Escalation comparison - == 'all': False, == 'Camera Annotation Events': True, == 'Impact Cases': False, != 'all': True
+DEBUG: api_charts - Branch: Camera Annotation Events
+
+DEBUG: get_monthly_data called with escalation='Camera Annotation Events', exclude_camera=False
+DEBUG: Branch: Camera Annotation Events
+
+DEBUG: get_monthly_data called with escalation='all', exclude_camera=False
+DEBUG: Branch: 'all' - will query all sources
+
+=== API CHARTS DEBUG ===
+Received params - escalation: 'all' (type: str, length: 3), email: 'all', hospital: 'all...', date: 'all', exclude_camera: False
+Escalation comparison - == 'all': True, == 'Camera Annotation Events': False, == 'Impact Cases': False, != 'all': False
+DEBUG: api_charts - Branch: else (escalation='all')
+
+DEBUG: get_monthly_data called with escalation='all', exclude_camera=False
+DEBUG: Branch: 'all' - will query all sources
+DEBUG: Monthly data has 16 escalation types: ['Impact Cases', 'Drop in GCS', 'Educating nurses', 'Gasping', 'Glycemic abnormality', 'Lab abnormality', 'Level 4 patients moved to ICU services', 'Lines and infusion syringes not labelled', 'Nursing care', 'Position not changed', 'Ventilator Alarm - Suctioning', 'Vitals abnormality', 'Issues', 'Jerky movement', 'Medication error', 'Camera Annotation Events']
+DEBUG: Chart will display 16 escalation types: ['Camera Annotation Events', 'Drop in GCS', 'Educating nurses', 'Gasping', 'Glycemic abnormality', 'Impact Cases', 'Issues', 'Jerky movement', 'Lab abnormality', 'Level 4 patients moved to ICU services', 'Lines and infusion syringes not labelled', 'Medication error', 'Nursing care', 'Position not changed', 'Ventilator Alarm - Suctioning', 'Vitals abnormality']
+
+=== API CHARTS DEBUG ===
+Received params - escalation: 'Educating nurses' (type: str, length: 16), email: 'all', hospital: 'all...', date: 'all', exclude_camera: False
+Escalation comparison - == 'all': False, == 'Camera Annotation Events': False, == 'Impact Cases': False, != 'all': True
+DEBUG: api_charts - Branch: else (escalation='Educating nurses')
+
+DEBUG: get_monthly_data called with escalation='Educating nurses', exclude_camera=False
+DEBUG: Branch: Specific escalation (not Camera/Impact, not 'all') - 'Educating nurses'
+DEBUG: Filtering for escalation (cleaned): 'Educating nurses' (escaped: 'Educating nurses')
+DEBUG: get_monthly_data - escalation='Educating nurses', escaped='Educating nurses'
+DEBUG: SQL Query (first 500 chars): 
+        SELECT 
+            EXTRACT(YEAR FROM timestamp) as year,
+            EXTRACT(MONTH FROM timestamp) as month,
+            escalation_observation,
+            COUNT(*) as count
+        FROM `prod-tech-project1-bv479-zo027.gsheet_data.nursing_pod_quality_data`
+        WHERE escalation_observation IS NOT NULL 
+        AND escalation_observation != ''
+        AND TRIM(escalation_observation) = 'Educating nurses'
+        GROUP BY year, month, escalation_observation
+        ORDER BY year, mon
+DEBUG: WHERE clause: TRIM(escalation_observation) = 'Educating nurses'
+DEBUG: get_monthly_data (specific escalation) - returned 10 rows
+DEBUG: Unique escalation types BEFORE filter check: ['Educating nurses']
+DEBUG: Monthly data has 1 escalation types: ['Educating nurses']
+DEBUG: Chart will display 1 escalation types: ['Educating nurses']
+
+DEBUG: get_monthly_data called with escalation='all', exclude_camera=False
+DEBUG: Branch: 'all' - will query all sources
+
+=== API CHARTS DEBUG ===
+Received params - escalation: 'all' (type: str, length: 3), email: 'all', hospital: 'all...', date: 'all', exclude_camera: False
+Escalation comparison - == 'all': True, == 'Camera Annotation Events': False, == 'Impact Cases': False, != 'all': False
+DEBUG: api_charts - Branch: else (escalation='all')
+
+DEBUG: get_monthly_data called with escalation='all', exclude_camera=False
+DEBUG: Branch: 'all' - will query all sources
+DEBUG: Monthly data has 16 escalation types: ['Impact Cases', 'Drop in GCS', 'Educating nurses', 'Gasping', 'Glycemic abnormality', 'Lab abnormality', 'Level 4 patients moved to ICU services', 'Lines and infusion syringes not labelled', 'Nursing care', 'Position not changed', 'Ventilator Alarm - Suctioning', 'Vitals abnormality', 'Issues', 'Jerky movement', 'Medication error', 'Camera Annotation Events']
+127.0.0.1 - - [31/Oct/2025 00:25:47] "GET /api/charts?escalation=all&email=all&hospital=all&date=all&exclude_camera=false HTTP/1.1" 200 -
+127.0.0.1 - - [31/Oct/2025 00:25:55] "GET /api/charts?escalation=Educating+nurses&email=all&hospital=all&date=all&exclude_camera=false HTTP/1.1" 200 -
+127.0.0.1 - - [31/Oct/2025 00:25:55] "GET /api/filter?escalation=Educating+nurses&email=all&hospital=all&date=all&exclude_camera=false HTTP/1.1" 200 -

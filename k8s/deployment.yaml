@@ -1,0 +1,96 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nursingpod-app
+  labels:
+    app: nursingpod-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nursingpod-app
+  template:
+    metadata:
+      labels:
+        app: nursingpod-app
+    spec:
+      containers:
+      - name: app
+        image: gcr.io/sanaths-projects/nursingpod-app:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+          name: http
+        env:
+        - name: PORT
+          value: "8080"
+        - name: FLASK_ENV
+          value: "production"
+        - name: GOOGLE_CLIENT_ID
+          valueFrom:
+            secretKeyRef:
+              name: nursingpod-secrets
+              key: google-client-id
+        - name: GOOGLE_CLIENT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: nursingpod-secrets
+              key: google-client-secret
+        - name: REDIRECT_URI
+          valueFrom:
+            configMapKeyRef:
+              name: nursingpod-config
+              key: redirect-uri
+        - name: SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: nursingpod-secrets
+              key: secret-key
+        - name: ALLOWED_DOMAIN
+          valueFrom:
+            configMapKeyRef:
+              name: nursingpod-config
+              key: allowed-domain
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "250m"
+          limits:
+            memory: "1Gi"
+            cpu: "500m"
+        livenessProbe:
+          httpGet:
+            path: /login-page
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /login-page
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          timeoutSeconds: 3
+          failureThreshold: 3
+      # Use Google Cloud service account for BigQuery access
+      serviceAccountName: nursingpod-sa
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nursingpod-service
+  labels:
+    app: nursingpod-app
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 8080
+    protocol: TCP
+    name: http
+  selector:
+    app: nursingpod-app
+

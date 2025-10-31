@@ -1,0 +1,459 @@
+/* Custom CSS for Nursing Pod Quality Dashboard */
+
+/* Font Families */
+body {
+    font-family: 'Source Sans Pro', sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+.main-title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    color: #0253a5;
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.subtitle {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 400;
+    color: #5f4987;
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+}
+
+.card-title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    color: #0253a5;
+    font-size: 1.5rem;
+}
+
+/* Header Styling */
+.dashboard-header {
+    background: linear-gradient(135deg, #1188C9 0%, #0253a5 100%);
+    color: white;
+    padding: 2rem 0;
+    margin-bottom: 2rem;
+    border-radius: 0 0 20px 20px;
+    box-shadow: 0 4px 15px rgba(17, 136, 201, 0.3);
+}
+
+.dashboard-header .main-title {
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.dashboard-header .subtitle {
+    color: #dcb695;
+    font-weight: 300;
+}
+
+.user-info {
+    text-align: right;
+    padding-top: 0.5rem;
+}
+
+.user-email {
+    color: #dcb695;
+    font-size: 0.9rem;
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+}
+
+.user-info .btn-outline-light {
+    border-color: #dcb695;
+    color: #dcb695;
+    font-weight: 600;
+}
+
+.user-info .btn-outline-light:hover {
+    background-color: #dcb695;
+    color: #0253a5;
+    border-color: #dcb695;
+}
+
+/* Card Styling */
+.card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+    background: white;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+.card-header {
+    background: linear-gradient(135deg, #5f4987 0%, #0253a5 100%);
+    color: white;
+    border-radius: 15px 15px 0 0 !important;
+    padding: 1.5rem;
+    border: none;
+}
+
+.card-header .card-title {
+    color: white;
+    margin: 0;
+    font-size: 1.3rem;
+}
+
+/* Filter Section */
+.filters-section {
+    margin-bottom: 2rem;
+}
+
+.filter-card {
+    background: linear-gradient(135deg, #dcb695 0%, #f8f9fa 100%);
+}
+
+.filter-card .card-header {
+    background: linear-gradient(135deg, #5f4987 0%, #1188C9 100%);
+}
+
+.form-label {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 600;
+    color: #0253a5;
+    margin-bottom: 0.5rem;
+}
+
+.form-select {
+    border: 2px solid #dcb695;
+    border-radius: 8px;
+    padding: 0.75rem;
+    font-family: 'Source Sans Pro', sans-serif;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-select:focus {
+    border-color: #1188C9;
+    box-shadow: 0 0 0 0.2rem rgba(17, 136, 201, 0.25);
+}
+
+/* Button Styling */
+.btn-primary {
+    background: linear-gradient(135deg, #1188C9 0%, #0253a5 100%);
+    border: none;
+    border-radius: 8px;
+    padding: 0.75rem 2rem;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #0253a5 0%, #1188C9 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(17, 136, 201, 0.4);
+}
+
+.btn-secondary {
+    background: linear-gradient(135deg, #5f4987 0%, #dcb695 100%);
+    border: none;
+    border-radius: 8px;
+    padding: 0.75rem 2rem;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 600;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+    background: linear-gradient(135deg, #dcb695 0%, #5f4987 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(95, 73, 135, 0.4);
+    color: white;
+}
+
+/* Filter Status */
+.filter-status {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 500;
+    color: #5f4987;
+    margin-left: 1rem;
+    font-style: italic;
+}
+
+/* Charts Section */
+.charts-section {
+    margin-bottom: 2rem;
+}
+
+.chart-card {
+    min-height: 700px;
+}
+
+.chart-card .card-body {
+    padding: 1.5rem;
+    min-height: calc(700px - 80px);
+}
+
+#monthly-trend-chart,
+#escalation-distribution-chart {
+    height: 100%;
+    width: 100%;
+    min-height: 600px;
+}
+
+/* Data Table Section */
+.data-section {
+    margin-bottom: 2rem;
+}
+
+.data-card {
+    min-height: 600px;
+}
+
+.data-count {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 500;
+    color: #dcb695;
+    font-size: 0.9rem;
+    float: right;
+    margin-top: 0.5rem;
+}
+
+/* Table Styling */
+.table {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 0.9rem;
+}
+
+.table thead th {
+    background: linear-gradient(135deg, #1188C9 0%, #0253a5 100%);
+    color: white;
+    border: none;
+    font-weight: 600;
+    padding: 1rem 0.75rem;
+}
+
+.table tbody tr {
+    transition: background-color 0.3s ease;
+}
+
+.table tbody tr:hover {
+    background-color: rgba(17, 136, 201, 0.1);
+}
+
+.table tbody td {
+    padding: 0.75rem;
+    border-color: #dcb695;
+    vertical-align: middle;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(220, 182, 149, 0.1);
+}
+
+/* Loading Spinner */
+.spinner-border {
+    color: #1188C9;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .main-title {
+        font-size: 2rem;
+    }
+    
+    .subtitle {
+        font-size: 1rem;
+    }
+    
+    .card-title {
+        font-size: 1.2rem;
+    }
+    
+    .chart-card {
+        height: 400px;
+        margin-bottom: 1rem;
+    }
+    
+    .btn-primary,
+    .btn-secondary {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .dashboard-header {
+        padding: 1.5rem 0;
+    }
+    
+    .main-title {
+        font-size: 1.8rem;
+    }
+    
+    .subtitle {
+        font-size: 0.9rem;
+    }
+    
+    .card {
+        margin-bottom: 1rem;
+    }
+    
+    .chart-card {
+        height: 350px;
+    }
+}
+
+/* Select2 styling customizations */
+.select2-container--bootstrap-5 .select2-selection {
+    border: 2px solid #dcb695;
+    border-radius: 8px;
+    min-height: 38px;
+}
+
+.select2-container--bootstrap-5.select2-container--focus .select2-selection {
+    border-color: #1188C9;
+    box-shadow: 0 0 0 0.2rem rgba(17, 136, 201, 0.25);
+}
+
+.select2-container--bootstrap-5 .select2-selection--multiple .select2-selection__choice {
+    background-color: #1188C9;
+    border-color: #1188C9;
+    color: white;
+    font-weight: 600;
+    margin: 2px;
+    padding: 2px 8px;
+}
+
+.select2-container--bootstrap-5 .select2-selection--multiple .select2-selection__choice__remove {
+    color: white;
+    margin-right: 5px;
+}
+
+.select2-container--bootstrap-5 .select2-selection--multiple .select2-selection__choice__remove:hover {
+    color: #dcb695;
+}
+
+/* Date range styling */
+.input-group {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(17, 136, 201, 0.1);
+}
+
+.input-group .form-control {
+    border: 2px solid #1188C9;
+    border-radius: 0;
+    padding: 0.6rem;
+    font-size: 0.9rem;
+}
+
+.input-group .form-control:focus {
+    border-color: #0253a5;
+    box-shadow: 0 0 0 0.2rem rgba(17, 136, 201, 0.25);
+}
+
+.input-group-text {
+    background-color: #1188C9;
+    color: white;
+    border: 2px solid #1188C9;
+    font-weight: 600;
+    padding: 0.6rem 0.8rem;
+}
+
+.form-text {
+    font-size: 0.8rem;
+    color: #5f4987;
+    margin-top: 0.25rem;
+    font-style: italic;
+}
+
+/* Custom Scrollbar */
+.table-responsive::-webkit-scrollbar {
+    height: 8px;
+}
+
+.table-responsive::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.table-responsive::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #1188C9 0%, #0253a5 100%);
+    border-radius: 4px;
+}
+
+.table-responsive::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #0253a5 0%, #1188C9 100%);
+}
+
+/* Animation for cards */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.card:nth-child(1) { animation-delay: 0.1s; }
+.card:nth-child(2) { animation-delay: 0.2s; }
+.card:nth-child(3) { animation-delay: 0.3s; }
+.card:nth-child(4) { animation-delay: 0.4s; }
+
+/* Hospital Filter Select/Unselect All Buttons */
+#select-all-hospitals,
+#unselect-all-hospitals {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 600;
+    font-size: 0.875rem;
+    padding: 0.35rem 0.75rem;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+#select-all-hospitals {
+    color: #1188C9;
+    border-color: #1188C9;
+}
+
+#select-all-hospitals:hover {
+    background-color: #1188C9;
+    color: white;
+    border-color: #1188C9;
+}
+
+#unselect-all-hospitals {
+    color: #6c757d;
+    border-color: #6c757d;
+}
+
+#unselect-all-hospitals:hover {
+    background-color: #6c757d;
+    color: white;
+    border-color: #6c757d;
+}
+
+/* Exclude Camera Annotations Checkbox */
+#exclude-camera-annotations {
+    margin-top: 0.5rem;
+}
+
+#exclude-camera-annotations:checked {
+    background-color: #1188C9;
+    border-color: #1188C9;
+}
+
+.form-check-label {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 0.875rem;
+    color: #333;
+    cursor: pointer;
+}

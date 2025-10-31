@@ -1,0 +1,70 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: nursingpod-app
+  annotations:
+    run.googleapis.com/ingress: all
+    run.googleapis.com/execution-environment: gen2
+spec:
+  template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/minScale: "0"
+        autoscaling.knative.dev/maxScale: "10"
+        run.googleapis.com/cpu-throttling: "true"
+        run.googleapis.com/execution-environment: gen2
+    spec:
+      containerConcurrency: 80
+      timeoutSeconds: 300
+      serviceAccountName: sanaths-projects@sanaths-projects.iam.gserviceaccount.com
+      containers:
+      - image: gcr.io/sanaths-projects/nursingpod-app:latest
+        ports:
+        - name: http1
+          containerPort: 8080
+        env:
+        - name: PORT
+          value: "8080"
+        - name: FLASK_ENV
+          value: "production"
+        - name: GOOGLE_CLIENT_ID
+          valueFrom:
+            secretKeyRef:
+              key: google-client-id
+              name: google-client-id
+        - name: GOOGLE_CLIENT_SECRET
+          valueFrom:
+            secretKeyRef:
+              key: google-client-secret
+              name: google-client-secret
+        - name: SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              key: secret-key
+              name: secret-key
+        - name: REDIRECT_URI
+          value: "https://SERVICE_URL/callback"
+          # Update with actual Cloud Run service URL
+        - name: ALLOWED_DOMAIN
+          value: "@cloudphysician.net"
+        resources:
+          limits:
+            cpu: "1000m"
+            memory: "1Gi"
+        startupProbe:
+          httpGet:
+            path: /login-page
+            port: 8080
+          initialDelaySeconds: 0
+          timeoutSeconds: 240
+          periodSeconds: 240
+          failureThreshold: 1
+        livenessProbe:
+          httpGet:
+            path: /login-page
+            port: 8080
+          initialDelaySeconds: 0
+          timeoutSeconds: 1
+          periodSeconds: 3600
+          failureThreshold: 1
+

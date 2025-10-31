@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nursingpod-ingress
+  annotations:
+    kubernetes.io/ingress.class: "gce"
+    kubernetes.io/ingress.global-static-ip-name: "nursingpod-ip"
+    # Uncomment for SSL certificate
+    # networking.gke.io/managed-certificates: "nursingpod-ssl-cert"
+    # For Cloud Load Balancer SSL
+    # ingress.gcp.kubernetes.io/ssl-cert: "nursingpod-ssl-cert"
+spec:
+  rules:
+  - host: your-domain.com
+    # Update with your actual domain
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: nursingpod-service
+            port:
+              number: 80
+
+
+
+

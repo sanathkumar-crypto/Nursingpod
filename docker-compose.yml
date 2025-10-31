@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: nursingpod-app
+    ports:
+      - "8080:8080"
+    environment:
+      - FLASK_ENV=production
+      - PORT=8080
+      # These should be set in .env file or via environment
+      - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
+      - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
+      - REDIRECT_URI=${REDIRECT_URI:-http://localhost:8080/callback}
+      - SECRET_KEY=${SECRET_KEY}
+      - ALLOWED_DOMAIN=${ALLOWED_DOMAIN:-@cloudphysician.net}
+      # Google Cloud credentials - use service account key file path or default credentials
+      - GOOGLE_APPLICATION_CREDENTIALS=${GOOGLE_APPLICATION_CREDENTIALS}
+    volumes:
+      # Mount Google Cloud credentials if using service account key file
+      - ${GOOGLE_APPLICATION_CREDENTIALS:-./gcloud-key.json}:/app/gcloud-key.json:ro
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/login-page"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+
+
+
