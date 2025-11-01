@@ -1,5 +1,7 @@
 # Production secrets - DO NOT COMMIT
 PRODUCTION_SECRET_KEY.txt
+PRODUCTION_SECRET_KEYTM
+*SECRET_KEY*
 
 # Google Cloud service account keys
 gcloud-key.json
