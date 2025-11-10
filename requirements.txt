@@ -1,12 +1,24 @@
+# FastAPI and ASGI server
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+jinja2==3.1.2
+python-multipart==0.0.6
+
+# Keep Flask for now (helper functions can be shared)
+# Can be removed after full migration
 flask==3.0.0
 flask-cors==4.0.0
+flask-login==0.6.3
+
+# Core dependencies
 python-dotenv==1.0.0
 pandas==2.1.4
 google-cloud-bigquery==3.13.0
 db-dtypes==1.2.0
 plotly==5.17.0
-flask-login==0.6.3
 google-auth==2.23.4
 google-auth-httplib2==0.1.1
 google-auth-oauthlib==1.1.0
-gunicorn==21.2.0
+
+# Production server (replaced gunicorn with uvicorn)
+# gunicorn==21.2.0  # No longer needed for FastAPI

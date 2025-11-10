@@ -316,6 +316,18 @@ body {
     box-shadow: 0 0 0 0.2rem rgba(17, 136, 201, 0.25);
 }
 
+/* Hide selected hospital tags/chips for hospital filter */
+/* Use a class-based approach for better browser compatibility */
+.select2-container--bootstrap-5.hospital-filter-container .select2-selection--multiple .select2-selection__choice {
+    display: none !important;
+    visibility: hidden !important;
+}
+
+/* Keep the selection container but hide the choices for hospital filter */
+.select2-container--bootstrap-5.hospital-filter-container .select2-selection--multiple .select2-selection__rendered {
+    padding-left: 8px !important;
+}
+
 .select2-container--bootstrap-5 .select2-selection--multiple .select2-selection__choice {
     background-color: #1188C9;
     border-color: #1188C9;
@@ -407,6 +419,48 @@ body {
 .card:nth-child(2) { animation-delay: 0.2s; }
 .card:nth-child(3) { animation-delay: 0.3s; }
 .card:nth-child(4) { animation-delay: 0.4s; }
+
+/* Hospital Filter Select2 Dropdown - Limit to 6 items */
+/* UNIVERSAL RULE - Target ALL Select2 dropdowns first, then be more specific */
+.select2-dropdown {
+    max-height: 280px !important;
+    overflow: hidden !important;
+}
+
+.select2-dropdown .select2-results {
+    max-height: 240px !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+}
+
+.select2-dropdown .select2-results__options {
+    max-height: 240px !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+}
+
+/* More specific targeting for hospital filter */
+.select2-dropdown.hospital-select2-dropdown {
+    max-height: 280px !important;
+    overflow: hidden !important;
+}
+
+.select2-dropdown.hospital-select2-dropdown .select2-results,
+.select2-dropdown.hospital-select2-dropdown .select2-results__options {
+    max-height: 240px !important; /* Approximately 6 items at 40px each */
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+}
+
+/* Style individual options */
+.select2-dropdown .select2-results__option,
+.select2-dropdown.hospital-select2-dropdown .select2-results__option {
+    padding: 8px 12px;
+    line-height: 1.5;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+}
 
 /* Hospital Filter Select/Unselect All Buttons */
 #select-all-hospitals,

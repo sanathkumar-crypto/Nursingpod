@@ -1,0 +1,22 @@
+INFO:     Will watch for changes in these directories: ['/home/sanath/Nursingpod']
+INFO:     Uvicorn running on http://0.0.0.0:5000 (Press CTRL+C to quit)
+INFO:     Started reloader process [872366] using WatchFiles
+INFO:     Started server process [872368]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+/home/sanath/Nursingpod/venv/lib/python3.12/site-packages/_plotly_utils/basevalidators.py:105: FutureWarning: The behavior of DatetimeProperties.to_pydatetime is deprecated, in a future version this will return a Series containing python datetime objects instead of an ndarray. To retain the old behavior, call `np.array` on the result
+  v = v.dt.to_pydatetime()
+/home/sanath/Nursingpod/venv/lib/python3.12/site-packages/_plotly_utils/basevalidators.py:105: FutureWarning: The behavior of DatetimeProperties.to_pydatetime is deprecated, in a future version this will return a Series containing python datetime objects instead of an ndarray. To retain the old behavior, call `np.array` on the result
+  v = v.dt.to_pydatetime()
+/home/sanath/Nursingpod/venv/lib/python3.12/site-packages/_plotly_utils/basevalidators.py:105: FutureWarning: The behavior of DatetimeProperties.to_pydatetime is deprecated, in a future version this will return a Series containing python datetime objects instead of an ndarray. To retain the old behavior, call `np.array` on the result
+  v = v.dt.to_pydatetime()
+/home/sanath/Nursingpod/venv/lib/python3.12/site-packages/_plotly_utils/basevalidators.py:105: FutureWarning: The behavior of DatetimeProperties.to_pydatetime is deprecated, in a future version this will return a Series containing python datetime objects instead of an ndarray. To retain the old behavior, call `np.array` on the result
+  v = v.dt.to_pydatetime()
+/home/sanath/Nursingpod/venv/lib/python3.12/site-packages/_plotly_utils/basevalidators.py:105: FutureWarning: The behavior of DatetimeProperties.to_pydatetime is deprecated, in a future version this will return a Series containing python datetime objects instead of an ndarray. To retain the old behavior, call `np.array` on the result
+  v = v.dt.to_pydatetime()
+/home/sanath/Nursingpod/venv/lib/python3.12/site-packages/_plotly_utils/basevalidators.py:105: FutureWarning: The behavior of DatetimeProperties.to_pydatetime is deprecated, in a future version this will return a Series containing python datetime objects instead of an ndarray. To retain the old behavior, call `np.array` on the result
+  v = v.dt.to_pydatetime()
+
+DEBUG: get_monthly_data called with escalation='all', exclude_camera=False
+DEBUG: Branch: 'all' - will query all sources
+INFO:     127.0.0.1:59068 - "GET / HTTP/1.1" 200 OK

@@ -5,4 +5,712 @@
  * Running on http://127.0.0.1:5000
  * Running on http://192.168.1.3:5000
 [33mPress CTRL+C to quit[0m
-127.0.0.1 - - [31/Oct/2025 11:45:43] "[32mGET / HTTP/1.1[0m" 302 -
+/home/sanath/Nursingpod/venv/lib/python3.12/site-packages/_plotly_utils/basevalidators.py:105: FutureWarning: The behavior of DatetimeProperties.to_pydatetime is deprecated, in a future version this will return a Series containing python datetime objects instead of an ndarray. To retain the old behavior, call `np.array` on the result
+  v = v.dt.to_pydatetime()
+/home/sanath/Nursingpod/venv/lib/python3.12/site-packages/_plotly_utils/basevalidators.py:105: FutureWarning: The behavior of DatetimeProperties.to_pydatetime is deprecated, in a future version this will return a Series containing python datetime objects instead of an ndarray. To retain the old behavior, call `np.array` on the result
+  v = v.dt.to_pydatetime()
+/home/sanath/Nursingpod/venv/lib/python3.12/site-packages/_plotly_utils/basevalidators.py:105: FutureWarning: The behavior of DatetimeProperties.to_pydatetime is deprecated, in a future version this will return a Series containing python datetime objects instead of an ndarray. To retain the old behavior, call `np.array` on the result
+  v = v.dt.to_pydatetime()
+/home/sanath/Nursingpod/venv/lib/python3.12/site-packages/_plotly_utils/basevalidators.py:105: FutureWarning: The behavior of DatetimeProperties.to_pydatetime is deprecated, in a future version this will return a Series containing python datetime objects instead of an ndarray. To retain the old behavior, call `np.array` on the result
+  v = v.dt.to_pydatetime()
+/home/sanath/Nursingpod/venv/lib/python3.12/site-packages/_plotly_utils/basevalidators.py:105: FutureWarning: The behavior of DatetimeProperties.to_pydatetime is deprecated, in a future version this will return a Series containing python datetime objects instead of an ndarray. To retain the old behavior, call `np.array` on the result
+  v = v.dt.to_pydatetime()
+/home/sanath/Nursingpod/venv/lib/python3.12/site-packages/_plotly_utils/basevalidators.py:105: FutureWarning: The behavior of DatetimeProperties.to_pydatetime is deprecated, in a future version this will return a Series containing python datetime objects instead of an ndarray. To retain the old behavior, call `np.array` on the result
+  v = v.dt.to_pydatetime()
+127.0.0.1 - - [11/Nov/2025 02:07:10] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2025 02:07:10] "GET /static/css/style.css HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2025 02:07:10] "GET /static/js/dashboard.js HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2025 02:07:10] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+127.0.0.1 - - [11/Nov/2025 02:07:11] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+127.0.0.1 - - [11/Nov/2025 02:07:12] "GET /api/filter?escalation=all&email=all&hospital=all&date=all&exclude_camera=false HTTP/1.1" 200 -
+/home/sanath/Nursingpod/venv/lib/python3.12/site-packages/_plotly_utils/basevalidators.py:105: FutureWarning:
+
+The behavior of DatetimeProperties.to_pydatetime is deprecated, in a future version this will return a Series containing python datetime objects instead of an ndarray. To retain the old behavior, call `np.array` on the result
+
+/home/sanath/Nursingpod/venv/lib/python3.12/site-packages/_plotly_utils/basevalidators.py:105: FutureWarning:
+
+The behavior of DatetimeProperties.to_pydatetime is deprecated, in a future version this will return a Series containing python datetime objects instead of an ndarray. To retain the old behavior, call `np.array` on the result
+
+/home/sanath/Nursingpod/venv/lib/python3.12/site-packages/_plotly_utils/basevalidators.py:105: FutureWarning:
+
+The behavior of DatetimeProperties.to_pydatetime is deprecated, in a future version this will return a Series containing python datetime objects instead of an ndarray. To retain the old behavior, call `np.array` on the result
+
+/home/sanath/Nursingpod/venv/lib/python3.12/site-packages/_plotly_utils/basevalidators.py:105: FutureWarning:
+
+The behavior of DatetimeProperties.to_pydatetime is deprecated, in a future version this will return a Series containing python datetime objects instead of an ndarray. To retain the old behavior, call `np.array` on the result
+
+/home/sanath/Nursingpod/venv/lib/python3.12/site-packages/_plotly_utils/basevalidators.py:105: FutureWarning:
+
+The behavior of DatetimeProperties.to_pydatetime is deprecated, in a future version this will return a Series containing python datetime objects instead of an ndarray. To retain the old behavior, call `np.array` on the result
+
+/home/sanath/Nursingpod/venv/lib/python3.12/site-packages/_plotly_utils/basevalidators.py:105: FutureWarning:
+
+The behavior of DatetimeProperties.to_pydatetime is deprecated, in a future version this will return a Series containing python datetime objects instead of an ndarray. To retain the old behavior, call `np.array` on the result
+
+127.0.0.1 - - [11/Nov/2025 02:07:13] "GET /api/charts?escalation=all&email=all&hospital=all&date=all&exclude_camera=false HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2025 02:07:32] "GET /api/filter?escalation=all&email=all&hospital=all&date=all&exclude_camera=false HTTP/1.1" 200 -
+/home/sanath/Nursingpod/venv/lib/python3.12/site-packages/_plotly_utils/basevalidators.py:105: FutureWarning:
+
+The behavior of DatetimeProperties.to_pydatetime is deprecated, in a future version this will return a Series containing python datetime objects instead of an ndarray. To retain the old behavior, call `np.array` on the result
+
+/home/sanath/Nursingpod/venv/lib/python3.12/site-packages/_plotly_utils/basevalidators.py:105: FutureWarning:
+
+The behavior of DatetimeProperties.to_pydatetime is deprecated, in a future version this will return a Series containing python datetime objects instead of an ndarray. To retain the old behavior, call `np.array` on the result
+
+/home/sanath/Nursingpod/venv/lib/python3.12/site-packages/_plotly_utils/basevalidators.py:105: FutureWarning:
+
+The behavior of DatetimeProperties.to_pydatetime is deprecated, in a future version this will return a Series containing python datetime objects instead of an ndarray. To retain the old behavior, call `np.array` on the result
+
+/home/sanath/Nursingpod/venv/lib/python3.12/site-packages/_plotly_utils/basevalidators.py:105: FutureWarning:
+
+The behavior of DatetimeProperties.to_pydatetime is deprecated, in a future version this will return a Series containing python datetime objects instead of an ndarray. To retain the old behavior, call `np.array` on the result
+
+/home/sanath/Nursingpod/venv/lib/python3.12/site-packages/_plotly_utils/basevalidators.py:105: FutureWarning:
+
+The behavior of DatetimeProperties.to_pydatetime is deprecated, in a future version this will return a Series containing python datetime objects instead of an ndarray. To retain the old behavior, call `np.array` on the result
+
+/home/sanath/Nursingpod/venv/lib/python3.12/site-packages/_plotly_utils/basevalidators.py:105: FutureWarning:
+
+The behavior of DatetimeProperties.to_pydatetime is deprecated, in a future version this will return a Series containing python datetime objects instead of an ndarray. To retain the old behavior, call `np.array` on the result
+
+127.0.0.1 - - [11/Nov/2025 02:07:33] "GET /api/charts?escalation=all&email=all&hospital=all&date=all&exclude_camera=false HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2025 02:07:37] "GET /api/filter?escalation=all&email=all&hospital=all&date=all&exclude_camera=false HTTP/1.1" 200 -
+/home/sanath/Nursingpod/venv/lib/python3.12/site-packages/_plotly_utils/basevalidators.py:105: FutureWarning:
+
+The behavior of DatetimeProperties.to_pydatetime is deprecated, in a future version this will return a Series containing python datetime objects instead of an ndarray. To retain the old behavior, call `np.array` on the result
+
+/home/sanath/Nursingpod/venv/lib/python3.12/site-packages/_plotly_utils/basevalidators.py:105: FutureWarning:
+
+The behavior of DatetimeProperties.to_pydatetime is deprecated, in a future version this will return a Series containing python datetime objects instead of an ndarray. To retain the old behavior, call `np.array` on the result
+
+/home/sanath/Nursingpod/venv/lib/python3.12/site-packages/_plotly_utils/basevalidators.py:105: FutureWarning:
+
+The behavior of DatetimeProperties.to_pydatetime is deprecated, in a future version this will return a Series containing python datetime objects instead of an ndarray. To retain the old behavior, call `np.array` on the result
+
+/home/sanath/Nursingpod/venv/lib/python3.12/site-packages/_plotly_utils/basevalidators.py:105: FutureWarning:
+
+The behavior of DatetimeProperties.to_pydatetime is deprecated, in a future version this will return a Series containing python datetime objects instead of an ndarray. To retain the old behavior, call `np.array` on the result
+
+/home/sanath/Nursingpod/venv/lib/python3.12/site-packages/_plotly_utils/basevalidators.py:105: FutureWarning:
+
+The behavior of DatetimeProperties.to_pydatetime is deprecated, in a future version this will return a Series containing python datetime objects instead of an ndarray. To retain the old behavior, call `np.array` on the result
+
+/home/sanath/Nursingpod/venv/lib/python3.12/site-packages/_plotly_utils/basevalidators.py:105: FutureWarning:
+
+The behavior of DatetimeProperties.to_pydatetime is deprecated, in a future version this will return a Series containing python datetime objects instead of an ndarray. To retain the old behavior, call `np.array` on the result
+
+127.0.0.1 - - [11/Nov/2025 02:07:39] "GET /api/charts?escalation=all&email=all&hospital=all&date=all&exclude_camera=false HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2025 02:07:42] "GET /api/filter?escalation=all&email=all&hospital=all&date=all&exclude_camera=false HTTP/1.1" 200 -
+/home/sanath/Nursingpod/venv/lib/python3.12/site-packages/_plotly_utils/basevalidators.py:105: FutureWarning:
+
+The behavior of DatetimeProperties.to_pydatetime is deprecated, in a future version this will return a Series containing python datetime objects instead of an ndarray. To retain the old behavior, call `np.array` on the result
+
+/home/sanath/Nursingpod/venv/lib/python3.12/site-packages/_plotly_utils/basevalidators.py:105: FutureWarning:
+
+The behavior of DatetimeProperties.to_pydatetime is deprecated, in a future version this will return a Series containing python datetime objects instead of an ndarray. To retain the old behavior, call `np.array` on the result
+
+/home/sanath/Nursingpod/venv/lib/python3.12/site-packages/_plotly_utils/basevalidators.py:105: FutureWarning:
+
+The behavior of DatetimeProperties.to_pydatetime is deprecated, in a future version this will return a Series containing python datetime objects instead of an ndarray. To retain the old behavior, call `np.array` on the result
+
+/home/sanath/Nursingpod/venv/lib/python3.12/site-packages/_plotly_utils/basevalidators.py:105: FutureWarning:
+
+The behavior of DatetimeProperties.to_pydatetime is deprecated, in a future version this will return a Series containing python datetime objects instead of an ndarray. To retain the old behavior, call `np.array` on the result
+
+/home/sanath/Nursingpod/venv/lib/python3.12/site-packages/_plotly_utils/basevalidators.py:105: FutureWarning:
+
+The behavior of DatetimeProperties.to_pydatetime is deprecated, in a future version this will return a Series containing python datetime objects instead of an ndarray. To retain the old behavior, call `np.array` on the result
+
+/home/sanath/Nursingpod/venv/lib/python3.12/site-packages/_plotly_utils/basevalidators.py:105: FutureWarning:
+
+The behavior of DatetimeProperties.to_pydatetime is deprecated, in a future version this will return a Series containing python datetime objects instead of an ndarray. To retain the old behavior, call `np.array` on the result
+
+127.0.0.1 - - [11/Nov/2025 02:07:44] "GET /api/charts?escalation=all&email=all&hospital=all&date=all&exclude_camera=false HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2025 02:07:48] "GET /api/filter?escalation=all&email=all&hospital=Karpagam+Hospital+-+Othakkalmandapam&date=all&exclude_camera=false HTTP/1.1" 200 -
+/home/sanath/Nursingpod/venv/lib/python3.12/site-packages/_plotly_utils/basevalidators.py:105: FutureWarning:
+
+The behavior of DatetimeProperties.to_pydatetime is deprecated, in a future version this will return a Series containing python datetime objects instead of an ndarray. To retain the old behavior, call `np.array` on the result
+
+127.0.0.1 - - [11/Nov/2025 02:07:50] "GET /api/charts?escalation=all&email=all&hospital=Karpagam+Hospital+-+Othakkalmandapam&date=all&exclude_camera=false HTTP/1.1" 200 -
+
+DEBUG: get_monthly_data called with escalation='all', exclude_camera=False
+DEBUG: Branch: 'all' - will query all sources
+
+DEBUG: get_filtered_data called with escalation='all', email='all', hospital='all', date='all', exclude_camera=False
+DEBUG: get_filtered_data - WHERE clause: DATE(timestamp) >= DATE_SUB(CURRENT_DATE(), INTERVAL 90 DAY)
+DEBUG: get_filtered_data - Number of conditions: 1
+
+=== API CHARTS DEBUG ===
+Received params - escalation: 'all' (type: str, length: 3), email: 'all', hospital: 'all...', date: 'all', exclude_camera: False
+Escalation normalized: 'all'
+Escalation comparison - == 'all': True, == 'Camera Annotation Events': False, == 'Impact Cases': False, == 'Educating nurses': False, != 'all': False
+Escalation repr: 'all'
+DEBUG: api_charts - Branch: else (escalation='all')
+
+DEBUG: get_monthly_data called with escalation='all', exclude_camera=False
+DEBUG: Branch: 'all' - will query all sources
+DEBUG: get_filtered_data - Returned 215 rows
+DEBUG: Monthly data has 6 escalation types: ['Impact Cases', 'Educating nurses', 'Level 4 patients moved to ICU services', 'Position not changed', 'Issues', 'Camera Annotation Events']
+DEBUG: Chart will display 8 escalation types: ['Camera Annotation Events', 'Educating nurses', 'Impact Cases', 'Issues', 'Level 4 patients moved to ICU services', 'Position not changed', 'Median', '+3 SD']
+
+DEBUG: get_filtered_data called with escalation='all', email='all', hospital='all', date='all', exclude_camera=False
+DEBUG: get_filtered_data - WHERE clause: DATE(timestamp) >= DATE_SUB(CURRENT_DATE(), INTERVAL 90 DAY)
+DEBUG: get_filtered_data - Number of conditions: 1
+
+=== API CHARTS DEBUG ===
+Received params - escalation: 'all' (type: str, length: 3), email: 'all', hospital: 'all...', date: 'all', exclude_camera: False
+Escalation normalized: 'all'
+Escalation comparison - == 'all': True, == 'Camera Annotation Events': False, == 'Impact Cases': False, == 'Educating nurses': False, != 'all': False
+Escalation repr: 'all'
+DEBUG: api_charts - Branch: else (escalation='all')
+
+DEBUG: get_monthly_data called with escalation='all', exclude_camera=False
+DEBUG: Branch: 'all' - will query all sources
+DEBUG: get_filtered_data - Returned 215 rows
+DEBUG: Monthly data has 6 escalation types: ['Impact Cases', 'Educating nurses', 'Level 4 patients moved to ICU services', 'Position not changed', 'Issues', 'Camera Annotation Events']
+DEBUG: Chart will display 8 escalation types: ['Camera Annotation Events', 'Educating nurses', 'Impact Cases', 'Issues', 'Level 4 patients moved to ICU services', 'Position not changed', 'Median', '+3 SD']
+
+DEBUG: get_filtered_data called with escalation='all', email='all', hospital='all', date='all', exclude_camera=False
+DEBUG: get_filtered_data - WHERE clause: DATE(timestamp) >= DATE_SUB(CURRENT_DATE(), INTERVAL 90 DAY)
+DEBUG: get_filtered_data - Number of conditions: 1
+
+=== API CHARTS DEBUG ===
+Received params - escalation: 'all' (type: str, length: 3), email: 'all', hospital: 'all...', date: 'all', exclude_camera: False
+Escalation normalized: 'all'
+Escalation comparison - == 'all': True, == 'Camera Annotation Events': False, == 'Impact Cases': False, == 'Educating nurses': False, != 'all': False
+Escalation repr: 'all'
+DEBUG: api_charts - Branch: else (escalation='all')
+
+DEBUG: get_monthly_data called with escalation='all', exclude_camera=False
+DEBUG: Branch: 'all' - will query all sources
+DEBUG: get_filtered_data - Returned 215 rows
+DEBUG: Monthly data has 6 escalation types: ['Impact Cases', 'Educating nurses', 'Level 4 patients moved to ICU services', 'Position not changed', 'Issues', 'Camera Annotation Events']
+DEBUG: Chart will display 8 escalation types: ['Camera Annotation Events', 'Educating nurses', 'Impact Cases', 'Issues', 'Level 4 patients moved to ICU services', 'Position not changed', 'Median', '+3 SD']
+
+DEBUG: get_filtered_data called with escalation='all', email='all', hospital='all', date='all', exclude_camera=False
+DEBUG: get_filtered_data - WHERE clause: DATE(timestamp) >= DATE_SUB(CURRENT_DATE(), INTERVAL 90 DAY)
+DEBUG: get_filtered_data - Number of conditions: 1
+
+=== API CHARTS DEBUG ===
+Received params - escalation: 'all' (type: str, length: 3), email: 'all', hospital: 'all...', date: 'all', exclude_camera: False
+Escalation normalized: 'all'
+Escalation comparison - == 'all': True, == 'Camera Annotation Events': False, == 'Impact Cases': False, == 'Educating nurses': False, != 'all': False
+Escalation repr: 'all'
+DEBUG: api_charts - Branch: else (escalation='all')
+
+DEBUG: get_monthly_data called with escalation='all', exclude_camera=False
+DEBUG: Branch: 'all' - will query all sources
+DEBUG: get_filtered_data - Returned 215 rows
+DEBUG: Monthly data has 6 escalation types: ['Impact Cases', 'Educating nurses', 'Level 4 patients moved to ICU services', 'Position not changed', 'Issues', 'Camera Annotation Events']
+DEBUG: Chart will display 8 escalation types: ['Camera Annotation Events', 'Educating nurses', 'Impact Cases', 'Issues', 'Level 4 patients moved to ICU services', 'Position not changed', 'Median', '+3 SD']
+
+DEBUG: get_filtered_data called with escalation='all', email='all', hospital='Karpagam Hospital - Othakkalmandapam', date='all', exclude_camera=False
+DEBUG: get_filtered_data - WHERE clause: hospital_name = 'Karpagam Hospital - Othakkalmandapam' AND DATE(timestamp) >= DATE_SUB(CURRENT_DATE(), INTERVAL 90 DAY)
+DEBUG: get_filtered_data - Number of conditions: 2
+
+=== API CHARTS DEBUG ===
+Received params - escalation: 'all' (type: str, length: 3), email: 'all', hospital: 'Karpagam Hospital - Othakkalmandapam...', date: 'all', exclude_camera: False
+Escalation normalized: 'all'
+Escalation comparison - == 'all': True, == 'Camera Annotation Events': False, == 'Impact Cases': False, == 'Educating nurses': False, != 'all': False
+Escalation repr: 'all'
+DEBUG: api_charts - Branch: else (escalation='all')
+
+DEBUG: get_monthly_data called with escalation='all', exclude_camera=False
+DEBUG: Branch: 'all' - will query all sources
+DEBUG: get_filtered_data - Returned 0 rows
+DEBUG: Monthly data has 1 escalation types: ['Camera Annotation Events']
+DEBUG: Chart will display 3 escalation types: ['Camera Annotation Events', 'Median', '+3 SD']
+
+DEBUG: get_filtered_data called with escalation='Educating nurses', email='all', hospital='Karpagam Hospital - Othakkalmandapam', date='all', exclude_camera=False
+DEBUG: get_filtered_data - WHERE clause: TRIM(escalation_observation) = 'Educating nurses' AND hospital_name = 'Karpagam Hospital - Othakkalmandapam' AND DATE(timestamp) >= DATE_SUB(CURRENT_DATE(), INTERVAL 90 DAY)
+DEBUG: get_filtered_data - Number of conditions: 3
+
+=== API CHARTS DEBUG ===
+Received params - escalation: 'Educating nurses' (type: str, length: 16), email: 'all', hospital: 'Karpagam Hospital - Othakkalmandapam...', date: 'all', exclude_camera: False
+Escalation normalized: 'Educating nurses'
+Escalation comparison - == 'all': False, == 'Camera Annotation Events': False, == 'Impact Cases': False, == 'Educating nurses': True, != 'all': True
+Escalation repr: 'Educating nurses'
+DEBUG: api_charts - Branch: Educating nurses
+
+DEBUG: get_monthly_data called with escalation='Educating nurses', exclude_camera=False
+DEBUG: Branch: Specific escalation (not Camera/Impact, not 'all') - 'Educating nurses'
+DEBUG: Filtering for escalation (cleaned): 'Educating nurses' (escaped: 'Educating nurses')
+DEBUG: get_monthly_data - escalation='Educating nurses', escaped='Educating nurses'
+DEBUG: SQL Query (first 500 chars): 
+        SELECT 
+            DATE_TRUNC(DATE(timestamp), MONTH) as date,
+            escalation_observation,
+            COUNT(*) as count
+        FROM `prod-tech-project1-bv479-zo027.gsheet_data.nursing_pod_quality_data`
+        WHERE escalation_observation IS NOT NULL 
+        AND escalation_observation != ''
+        AND TRIM(escalation_observation) = 'Educating nurses' AND hospital_name = 'Karpagam Hospital - Othakkalmandapam' AND DATE(timestamp) >= DATE_SUB(CURRENT_DATE(), INTERVAL 90 DAY)
+ 
+127.0.0.1 - - [11/Nov/2025 02:08:00] "GET /api/filter?escalation=Educating+nurses&email=all&hospital=Karpagam+Hospital+-+Othakkalmandapam&date=all&exclude_camera=false HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2025 02:08:01] "GET /api/charts?escalation=Educating+nurses&email=all&hospital=Karpagam+Hospital+-+Othakkalmandapam&date=all&exclude_camera=false HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2025 02:08:26] "GET /api/filter?escalation=Educating+nurses&email=all&hospital=all&date=all&exclude_camera=false HTTP/1.1" 200 -
+/home/sanath/Nursingpod/venv/lib/python3.12/site-packages/_plotly_utils/basevalidators.py:105: FutureWarning:
+
+The behavior of DatetimeProperties.to_pydatetime is deprecated, in a future version this will return a Series containing python datetime objects instead of an ndarray. To retain the old behavior, call `np.array` on the result
+
+127.0.0.1 - - [11/Nov/2025 02:08:27] "GET /api/charts?escalation=Educating+nurses&email=all&hospital=all&date=all&exclude_camera=false HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2025 02:08:51] "GET /api/filter?escalation=Educating+nurses&email=all&hospital=Karpagam+Hospital+-+Othakkalmandapam&date=all&exclude_camera=false HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2025 02:08:52] "GET /api/charts?escalation=Educating+nurses&email=all&hospital=Karpagam+Hospital+-+Othakkalmandapam&date=all&exclude_camera=false HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2025 02:09:02] "GET /api/filter?escalation=Educating+nurses&email=all&hospital=all&date=all&exclude_camera=false HTTP/1.1" 200 -
+/home/sanath/Nursingpod/venv/lib/python3.12/site-packages/_plotly_utils/basevalidators.py:105: FutureWarning:
+
+The behavior of DatetimeProperties.to_pydatetime is deprecated, in a future version this will return a Series containing python datetime objects instead of an ndarray. To retain the old behavior, call `np.array` on the result
+
+127.0.0.1 - - [11/Nov/2025 02:09:02] "GET /api/charts?escalation=Educating+nurses&email=all&hospital=all&date=all&exclude_camera=false HTTP/1.1" 200 -
+DEBUG: WHERE clause: TRIM(escalation_observation) = 'Educating nurses' AND hospital_name = 'Karpagam Hospital - Othakkalmandapam' AND DATE(timestamp) >= DATE_SUB(CURRENT_DATE(), INTERVAL 90 DAY)
+DEBUG: get_filtered_data - Returned 0 rows
+DEBUG: get_monthly_data (specific escalation) - returned 0 rows
+DEBUG: DataFrame is empty - no data found for this filter
+
+DEBUG: get_filtered_data called with escalation='Educating nurses', email='all', hospital='all', date='all', exclude_camera=False
+DEBUG: get_filtered_data - WHERE clause: TRIM(escalation_observation) = 'Educating nurses' AND DATE(timestamp) >= DATE_SUB(CURRENT_DATE(), INTERVAL 90 DAY)
+DEBUG: get_filtered_data - Number of conditions: 2
+
+=== API CHARTS DEBUG ===
+Received params - escalation: 'Educating nurses' (type: str, length: 16), email: 'all', hospital: 'all...', date: 'all', exclude_camera: False
+Escalation normalized: 'Educating nurses'
+Escalation comparison - == 'all': False, == 'Camera Annotation Events': False, == 'Impact Cases': False, == 'Educating nurses': True, != 'all': True
+Escalation repr: 'Educating nurses'
+DEBUG: api_charts - Branch: Educating nurses
+
+DEBUG: get_monthly_data called with escalation='Educating nurses', exclude_camera=False
+DEBUG: Branch: Specific escalation (not Camera/Impact, not 'all') - 'Educating nurses'
+DEBUG: Filtering for escalation (cleaned): 'Educating nurses' (escaped: 'Educating nurses')
+DEBUG: get_monthly_data - escalation='Educating nurses', escaped='Educating nurses'
+DEBUG: SQL Query (first 500 chars): 
+        SELECT 
+            DATE_TRUNC(DATE(timestamp), MONTH) as date,
+            escalation_observation,
+            COUNT(*) as count
+        FROM `prod-tech-project1-bv479-zo027.gsheet_data.nursing_pod_quality_data`
+        WHERE escalation_observation IS NOT NULL 
+        AND escalation_observation != ''
+        AND TRIM(escalation_observation) = 'Educating nurses' AND DATE(timestamp) >= DATE_SUB(CURRENT_DATE(), INTERVAL 90 DAY)
+        GROUP BY DATE_TRUNC(DATE(timestamp), MONTH), escalat
+DEBUG: WHERE clause: TRIM(escalation_observation) = 'Educating nurses' AND DATE(timestamp) >= DATE_SUB(CURRENT_DATE(), INTERVAL 90 DAY)
+DEBUG: get_filtered_data - Returned 178 rows
+DEBUG: get_filtered_data - Unique escalation types in results: ['Educating nurses']
+DEBUG: get_monthly_data (specific escalation) - returned 4 rows
+DEBUG: Unique escalation types BEFORE filter check: ['Educating nurses']
+
+DEBUG: get_filtered_data called with escalation='Educating nurses', email='all', hospital='Karpagam Hospital - Othakkalmandapam', date='all', exclude_camera=False
+DEBUG: get_filtered_data - WHERE clause: TRIM(escalation_observation) = 'Educating nurses' AND hospital_name = 'Karpagam Hospital - Othakkalmandapam' AND DATE(timestamp) >= DATE_SUB(CURRENT_DATE(), INTERVAL 90 DAY)
+DEBUG: get_filtered_data - Number of conditions: 3
+
+=== API CHARTS DEBUG ===
+Received params - escalation: 'Educating nurses' (type: str, length: 16), email: 'all', hospital: 'Karpagam Hospital - Othakkalmandapam...', date: 'all', exclude_camera: False
+Escalation normalized: 'Educating nurses'
+Escalation comparison - == 'all': False, == 'Camera Annotation Events': False, == 'Impact Cases': False, == 'Educating nurses': True, != 'all': True
+Escalation repr: 'Educating nurses'
+DEBUG: api_charts - Branch: Educating nurses
+
+DEBUG: get_monthly_data called with escalation='Educating nurses', exclude_camera=False
+DEBUG: Branch: Specific escalation (not Camera/Impact, not 'all') - 'Educating nurses'
+DEBUG: Filtering for escalation (cleaned): 'Educating nurses' (escaped: 'Educating nurses')
+DEBUG: get_monthly_data - escalation='Educating nurses', escaped='Educating nurses'
+DEBUG: SQL Query (first 500 chars): 
+        SELECT 
+            DATE_TRUNC(DATE(timestamp), MONTH) as date,
+            escalation_observation,
+            COUNT(*) as count
+        FROM `prod-tech-project1-bv479-zo027.gsheet_data.nursing_pod_quality_data`
+        WHERE escalation_observation IS NOT NULL 
+        AND escalation_observation != ''
+        AND TRIM(escalation_observation) = 'Educating nurses' AND hospital_name = 'Karpagam Hospital - Othakkalmandapam' AND DATE(timestamp) >= DATE_SUB(CURRENT_DATE(), INTERVAL 90 DAY)
+ 
+DEBUG: WHERE clause: TRIM(escalation_observation) = 'Educating nurses' AND hospital_name = 'Karpagam Hospital - Othakkalmandapam' AND DATE(timestamp) >= DATE_SUB(CURRENT_DATE(), INTERVAL 90 DAY)
+DEBUG: get_filtered_data - Returned 0 rows
+DEBUG: get_monthly_data (specific escalation) - returned 0 rows
+DEBUG: DataFrame is empty - no data found for this filter
+
+DEBUG: get_filtered_data called with escalation='Educating nurses', email='all', hospital='all', date='all', exclude_camera=False
+DEBUG: get_filtered_data - WHERE clause: TRIM(escalation_observation) = 'Educating nurses' AND DATE(timestamp) >= DATE_SUB(CURRENT_DATE(), INTERVAL 90 DAY)
+DEBUG: get_filtered_data - Number of conditions: 2
+
+=== API CHARTS DEBUG ===
+Received params - escalation: 'Educating nurses' (type: str, length: 16), email: 'all', hospital: 'all...', date: 'all', exclude_camera: False
+Escalation normalized: 'Educating nurses'
+Escalation comparison - == 'all': False, == 'Camera Annotation Events': False, == 'Impact Cases': False, == 'Educating nurses': True, != 'all': True
+Escalation repr: 'Educating nurses'
+DEBUG: api_charts - Branch: Educating nurses
+
+DEBUG: get_monthly_data called with escalation='Educating nurses', exclude_camera=False
+DEBUG: Branch: Specific escalation (not Camera/Impact, not 'all') - 'Educating nurses'
+DEBUG: Filtering for escalation (cleaned): 'Educating nurses' (escaped: 'Educating nurses')
+DEBUG: get_monthly_data - escalation='Educating nurses', escaped='Educating nurses'
+DEBUG: SQL Query (first 500 chars): 
+        SELECT 
+            DATE_TRUNC(DATE(timestamp), MONTH) as date,
+            escalation_observation,
+            COUNT(*) as count
+        FROM `prod-tech-project1-bv479-zo027.gsheet_data.nursing_pod_quality_data`
+        WHERE escalation_observation IS NOT NULL 
+        AND escalation_observation != ''
+        AND TRIM(escalation_observation) = 'Educating nurses' AND DATE(timestamp) >= DATE_SUB(CURRENT_DATE(), INTERVAL 90 DAY)
+        GROUP BY DATE_TRUNC(DATE(timestamp), MONTH), escalat
+DEBUG: WHERE clause: TRIM(escalation_observation) = 'Educating nurses' AND DATE(timestamp) >= DATE_SUB(CURRENT_DATE(), INTERVAL 90 DAY)
+DEBUG: get_filtered_data - Returned 178 rows
+DEBUG: get_filtered_data - Unique escalation types in results: ['Educating nurses']
+DEBUG: get_monthly_data (specific escalation) - returned 4 rows
+DEBUG: Unique escalation types BEFORE filter check: ['Educating nurses']
+
+DEBUG: get_filtered_data called with escalation='Educating nurses', email='all', hospital='Kalpataru Hospital - Anjangaon', date='all', exclude_camera=False
+DEBUG: get_filtered_data - WHERE clause: TRIM(escalation_observation) = 'Educating nurses' AND hospital_name = 'Kalpataru Hospital - Anjangaon' AND DATE(timestamp) >= DATE_SUB(CURRENT_DATE(), INTERVAL 90 DAY)
+DEBUG: get_filtered_data - Number of conditions: 3
+
+=== API CHARTS DEBUG ===
+Received params - escalation: 'Educating nurses' (type: str, length: 16), email: 'all', hospital: 'Kalpataru Hospital - Anjangaon...', date: 'all', exclude_camera: False
+Escalation normalized: 'Educating nurses'
+Escalation comparison - == 'all': False, == 'Camera Annotation Events': False, == 'Impact Cases': False, == 'Educating nurses': True, != 'all': True
+Escalation repr: 'Educating nurses'
+DEBUG: api_charts - Branch: Educating nurses
+
+DEBUG: get_monthly_data called with escalation='Educating nurses', exclude_camera=False
+DEBUG: Branch: Specific escalation (not Camera/Impact, not 'all') - 'Educating nurses'
+DEBUG: Filtering for escalation (cleaned): 'Educating nurses' (escaped: 'Educating nurses')
+DEBUG: get_monthly_data - escalation='Educating nurses', escaped='Educating nurses'
+127.0.0.1 - - [11/Nov/2025 02:09:07] "GET /api/filter?escalation=Educating+nurses&email=all&hospital=Kalpataru+Hospital+-+Anjangaon&date=all&exclude_camera=false HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2025 02:09:08] "GET /api/charts?escalation=Educating+nurses&email=all&hospital=Kalpataru+Hospital+-+Anjangaon&date=all&exclude_camera=false HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2025 02:09:33] "GET /api/filter?escalation=Educating+nurses&email=all&hospital=all&date=all&exclude_camera=false HTTP/1.1" 200 -
+/home/sanath/Nursingpod/venv/lib/python3.12/site-packages/_plotly_utils/basevalidators.py:105: FutureWarning:
+
+The behavior of DatetimeProperties.to_pydatetime is deprecated, in a future version this will return a Series containing python datetime objects instead of an ndarray. To retain the old behavior, call `np.array` on the result
+
+127.0.0.1 - - [11/Nov/2025 02:09:34] "GET /api/charts?escalation=Educating+nurses&email=all&hospital=all&date=all&exclude_camera=false HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2025 02:09:40] "GET /api/filter?escalation=Educating+nurses&email=all&hospital=Shree+Vishudhanand+-+Kolkata&date=all&exclude_camera=false HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2025 02:09:41] "GET /api/charts?escalation=Educating+nurses&email=all&hospital=Shree+Vishudhanand+-+Kolkata&date=all&exclude_camera=false HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2025 02:09:44] "GET /api/filter?escalation=Educating+nurses&email=all&hospital=Shree+Narsinh+-+Balod_ICU+Services,Shree+Vishudhanand+-+Kolkata&date=all&exclude_camera=false HTTP/1.1" 200 -
+DEBUG: SQL Query (first 500 chars): 
+        SELECT 
+            DATE_TRUNC(DATE(timestamp), MONTH) as date,
+            escalation_observation,
+            COUNT(*) as count
+        FROM `prod-tech-project1-bv479-zo027.gsheet_data.nursing_pod_quality_data`
+        WHERE escalation_observation IS NOT NULL 
+        AND escalation_observation != ''
+        AND TRIM(escalation_observation) = 'Educating nurses' AND hospital_name = 'Kalpataru Hospital - Anjangaon' AND DATE(timestamp) >= DATE_SUB(CURRENT_DATE(), INTERVAL 90 DAY)
+       
+DEBUG: WHERE clause: TRIM(escalation_observation) = 'Educating nurses' AND hospital_name = 'Kalpataru Hospital - Anjangaon' AND DATE(timestamp) >= DATE_SUB(CURRENT_DATE(), INTERVAL 90 DAY)
+DEBUG: get_monthly_data (specific escalation) - returned 0 rows
+DEBUG: DataFrame is empty - no data found for this filter
+DEBUG: get_filtered_data - Returned 0 rows
+
+DEBUG: get_filtered_data called with escalation='Educating nurses', email='all', hospital='all', date='all', exclude_camera=False
+DEBUG: get_filtered_data - WHERE clause: TRIM(escalation_observation) = 'Educating nurses' AND DATE(timestamp) >= DATE_SUB(CURRENT_DATE(), INTERVAL 90 DAY)
+DEBUG: get_filtered_data - Number of conditions: 2
+
+=== API CHARTS DEBUG ===
+Received params - escalation: 'Educating nurses' (type: str, length: 16), email: 'all', hospital: 'all...', date: 'all', exclude_camera: False
+Escalation normalized: 'Educating nurses'
+Escalation comparison - == 'all': False, == 'Camera Annotation Events': False, == 'Impact Cases': False, == 'Educating nurses': True, != 'all': True
+Escalation repr: 'Educating nurses'
+DEBUG: api_charts - Branch: Educating nurses
+
+DEBUG: get_monthly_data called with escalation='Educating nurses', exclude_camera=False
+DEBUG: Branch: Specific escalation (not Camera/Impact, not 'all') - 'Educating nurses'
+DEBUG: Filtering for escalation (cleaned): 'Educating nurses' (escaped: 'Educating nurses')
+DEBUG: get_monthly_data - escalation='Educating nurses', escaped='Educating nurses'
+DEBUG: SQL Query (first 500 chars): 
+        SELECT 
+            DATE_TRUNC(DATE(timestamp), MONTH) as date,
+            escalation_observation,
+            COUNT(*) as count
+        FROM `prod-tech-project1-bv479-zo027.gsheet_data.nursing_pod_quality_data`
+        WHERE escalation_observation IS NOT NULL 
+        AND escalation_observation != ''
+        AND TRIM(escalation_observation) = 'Educating nurses' AND DATE(timestamp) >= DATE_SUB(CURRENT_DATE(), INTERVAL 90 DAY)
+        GROUP BY DATE_TRUNC(DATE(timestamp), MONTH), escalat
+DEBUG: WHERE clause: TRIM(escalation_observation) = 'Educating nurses' AND DATE(timestamp) >= DATE_SUB(CURRENT_DATE(), INTERVAL 90 DAY)
+DEBUG: get_filtered_data - Returned 178 rows
+DEBUG: get_filtered_data - Unique escalation types in results: ['Educating nurses']
+DEBUG: get_monthly_data (specific escalation) - returned 4 rows
+DEBUG: Unique escalation types BEFORE filter check: ['Educating nurses']
+
+DEBUG: get_filtered_data called with escalation='Educating nurses', email='all', hospital='Shree Vishudhanand - Kolkata', date='all', exclude_camera=False
+DEBUG: get_filtered_data - WHERE clause: TRIM(escalation_observation) = 'Educating nurses' AND hospital_name = 'Shree Vishudhanand - Kolkata' AND DATE(timestamp) >= DATE_SUB(CURRENT_DATE(), INTERVAL 90 DAY)
+DEBUG: get_filtered_data - Number of conditions: 3
+
+=== API CHARTS DEBUG ===
+Received params - escalation: 'Educating nurses' (type: str, length: 16), email: 'all', hospital: 'Shree Vishudhanand - Kolkata...', date: 'all', exclude_camera: False
+Escalation normalized: 'Educating nurses'
+Escalation comparison - == 'all': False, == 'Camera Annotation Events': False, == 'Impact Cases': False, == 'Educating nurses': True, != 'all': True
+Escalation repr: 'Educating nurses'
+DEBUG: api_charts - Branch: Educating nurses
+
+DEBUG: get_monthly_data called with escalation='Educating nurses', exclude_camera=False
+DEBUG: Branch: Specific escalation (not Camera/Impact, not 'all') - 'Educating nurses'
+DEBUG: Filtering for escalation (cleaned): 'Educating nurses' (escaped: 'Educating nurses')
+DEBUG: get_monthly_data - escalation='Educating nurses', escaped='Educating nurses'
+DEBUG: SQL Query (first 500 chars): 
+        SELECT 
+            DATE_TRUNC(DATE(timestamp), MONTH) as date,
+            escalation_observation,
+            COUNT(*) as count
+        FROM `prod-tech-project1-bv479-zo027.gsheet_data.nursing_pod_quality_data`
+        WHERE escalation_observation IS NOT NULL 
+        AND escalation_observation != ''
+        AND TRIM(escalation_observation) = 'Educating nurses' AND hospital_name = 'Shree Vishudhanand - Kolkata' AND DATE(timestamp) >= DATE_SUB(CURRENT_DATE(), INTERVAL 90 DAY)
+        G
+DEBUG: WHERE clause: TRIM(escalation_observation) = 'Educating nurses' AND hospital_name = 'Shree Vishudhanand - Kolkata' AND DATE(timestamp) >= DATE_SUB(CURRENT_DATE(), INTERVAL 90 DAY)
+DEBUG: get_filtered_data - Returned 0 rows
+DEBUG: get_monthly_data (specific escalation) - returned 0 rows
+DEBUG: DataFrame is empty - no data found for this filter
+
+DEBUG: get_filtered_data called with escalation='Educating nurses', email='all', hospital='Shree Narsinh - Balod_ICU Services,Shree Vishudhanand - Kolkata', date='all', exclude_camera=False
+DEBUG: get_filtered_data - WHERE clause: TRIM(escalation_observation) = 'Educating nurses' AND hospital_name IN ('Shree Narsinh - Balod_ICU Services', 'Shree Vishudhanand - Kolkata') AND DATE(timestamp) >= DATE_SUB(CURRENT_DATE(), INTERVAL 90 DAY)
+DEBUG: get_filtered_data - Number of conditions: 3
+
+=== API CHARTS DEBUG ===
+Received params - escalation: 'Educating nurses' (type: str, length: 16), email: 'all', hospital: 'Shree Narsinh - Balod_ICU Services,Shree Vishudhanand - Kolkata...', date: 'all', exclude_camera: False
+Escalation normalized: 'Educating nurses'
+Escalation comparison - == 'all': False, == 'Camera Annotation Events': False, == 'Impact Cases': False, == 'Educating nurses': True, != 'all': True
+Escalation repr: 'Educating nurses'
+DEBUG: api_charts - Branch: Educating nurses
+
+DEBUG: get_monthly_data called with escalation='Educating nurses', exclude_camera=False
+DEBUG: Branch: Specific escalation (not Camera/Impact, not 'all') - 'Educating nurses'
+DEBUG: Filtering for escalation (cleaned): 'Educating nurses' (escaped: 'Educating nurses')
+DEBUG: get_monthly_data - escalation='Educating nurses', escaped='Educating nurses'
+DEBUG: SQL Query (first 500 chars): 
+        SELECT 
+            DATE_TRUNC(DATE(timestamp), MONTH) as date,
+            escalation_observation,
+            COUNT(*) as count
+        FROM `prod-tech-project1-bv479-zo027.gsheet_data.nursing_pod_quality_data`
+        WHERE escalation_observation IS NOT NULL 
+        AND escalation_observation != ''
+        AND TRIM(escalation_observation) = 'Educating nurses' AND hospital_name IN ('Shree Narsinh - Balod_ICU Services', 'Shree Vishudhanand - Kolkata') AND DATE(timestamp) >= DATE_SUB(C
+DEBUG: WHERE clause: TRIM(escalation_observation) = 'Educating nurses' AND hospital_name IN ('Shree Narsinh - Balod_ICU Services', 'Shree Vishudhanand - Kolkata') AND DATE(timestamp) >= DATE_SUB(CURRENT_DATE(), INTERVAL 90 DAY)
+DEBUG: get_filtered_data - Returned 0 rows
+DEBUG: get_monthly_data (specific escalation) - returned 0 rows
+DEBUG: DataFrame is empty - no data found for this filter
+
+DEBUG: get_filtered_data called with escalation='Educating nurses', email='all', hospital='Shree Narsinh - Balod_ICU Services,Shree Vishudhanand - Kolkata,Shree Vishudhanand - Kolkata | HDU', date='all', exclude_camera=False
+DEBUG: get_filtered_data - WHERE clause: TRIM(escalation_observation) = 'Educating nurses' AND hospital_name IN ('Shree Narsinh - Balod_ICU Services', 'Shree Vishudhanand - Kolkata', 'Shree Vishudhanand - Kolkata | HDU') AND DATE(timestamp) >= DATE_SUB(CURRENT_DATE(), INTERVAL 90 DAY)
+DEBUG: get_filtered_data - Number of conditions: 3
+
+=== API CHARTS DEBUG ===
+Received params - escalation: 'Educating nurses' (type: str, length: 16), email: 'all', hospital: 'Shree Narsinh - Balod_ICU Services,Shree Vishudhanand - Kolkata,Shree Vishudhanand - Kolkata | HDU...', date: 'all', exclude_camera: False
+127.0.0.1 - - [11/Nov/2025 02:09:45] "GET /api/charts?escalation=Educating+nurses&email=all&hospital=Shree+Narsinh+-+Balod_ICU+Services,Shree+Vishudhanand+-+Kolkata&date=all&exclude_camera=false HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2025 02:09:45] "GET /api/filter?escalation=Educating+nurses&email=all&hospital=Shree+Narsinh+-+Balod_ICU+Services,Shree+Vishudhanand+-+Kolkata,Shree+Vishudhanand+-+Kolkata+|+HDU&date=all&exclude_camera=false HTTP/1.1" 200 -
+/home/sanath/Nursingpod/venv/lib/python3.12/site-packages/_plotly_utils/basevalidators.py:105: FutureWarning:
+
+The behavior of DatetimeProperties.to_pydatetime is deprecated, in a future version this will return a Series containing python datetime objects instead of an ndarray. To retain the old behavior, call `np.array` on the result
+
+127.0.0.1 - - [11/Nov/2025 02:09:46] "GET /api/charts?escalation=Educating+nurses&email=all&hospital=Shree+Narsinh+-+Balod_ICU+Services,Shree+Vishudhanand+-+Kolkata,Shree+Vishudhanand+-+Kolkata+|+HDU&date=all&exclude_camera=false HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2025 02:09:48] "GET /api/filter?escalation=Educating+nurses&email=all&hospital=Shree+Narsinh+-+Balod_ICU+Services,Shree+Vishudhanand+-+Kolkata,Shree+Vishudhanand+-+Kolkata+|+HDU,Shree+Vishudhanand+-+Kolkata+|+ICU&date=all&exclude_camera=false HTTP/1.1" 200 -
+/home/sanath/Nursingpod/venv/lib/python3.12/site-packages/_plotly_utils/basevalidators.py:105: FutureWarning:
+
+The behavior of DatetimeProperties.to_pydatetime is deprecated, in a future version this will return a Series containing python datetime objects instead of an ndarray. To retain the old behavior, call `np.array` on the result
+
+127.0.0.1 - - [11/Nov/2025 02:09:49] "GET /api/charts?escalation=Educating+nurses&email=all&hospital=Shree+Narsinh+-+Balod_ICU+Services,Shree+Vishudhanand+-+Kolkata,Shree+Vishudhanand+-+Kolkata+|+HDU,Shree+Vishudhanand+-+Kolkata+|+ICU&date=all&exclude_camera=false HTTP/1.1" 200 -
+Escalation normalized: 'Educating nurses'
+Escalation comparison - == 'all': False, == 'Camera Annotation Events': False, == 'Impact Cases': False, == 'Educating nurses': True, != 'all': True
+Escalation repr: 'Educating nurses'
+DEBUG: api_charts - Branch: Educating nurses
+
+DEBUG: get_monthly_data called with escalation='Educating nurses', exclude_camera=False
+DEBUG: Branch: Specific escalation (not Camera/Impact, not 'all') - 'Educating nurses'
+DEBUG: Filtering for escalation (cleaned): 'Educating nurses' (escaped: 'Educating nurses')
+DEBUG: get_monthly_data - escalation='Educating nurses', escaped='Educating nurses'
+DEBUG: SQL Query (first 500 chars): 
+        SELECT 
+            DATE_TRUNC(DATE(timestamp), MONTH) as date,
+            escalation_observation,
+            COUNT(*) as count
+        FROM `prod-tech-project1-bv479-zo027.gsheet_data.nursing_pod_quality_data`
+        WHERE escalation_observation IS NOT NULL 
+        AND escalation_observation != ''
+        AND TRIM(escalation_observation) = 'Educating nurses' AND hospital_name IN ('Shree Narsinh - Balod_ICU Services', 'Shree Vishudhanand - Kolkata', 'Shree Vishudhanand - Kolkata | H
+DEBUG: WHERE clause: TRIM(escalation_observation) = 'Educating nurses' AND hospital_name IN ('Shree Narsinh - Balod_ICU Services', 'Shree Vishudhanand - Kolkata', 'Shree Vishudhanand - Kolkata | HDU') AND DATE(timestamp) >= DATE_SUB(CURRENT_DATE(), INTERVAL 90 DAY)
+DEBUG: get_filtered_data - Returned 1 rows
+DEBUG: get_filtered_data - Unique escalation types in results: ['Educating nurses']
+DEBUG: get_monthly_data (specific escalation) - returned 1 rows
+DEBUG: Unique escalation types BEFORE filter check: ['Educating nurses']
+
+=== API CHARTS DEBUG ===
+Received params - escalation: 'Educating nurses' (type: str, length: 16), email: 'all', hospital: 'Shree Narsinh - Balod_ICU Services,Shree Vishudhanand - Kolkata,Shree Vishudhanand - Kolkata | HDU,S...', date: 'all', exclude_camera: False
+Escalation normalized: 'Educating nurses'
+Escalation comparison - == 'all': False, == 'Camera Annotation Events': False, == 'Impact Cases': False, == 'Educating nurses': True, != 'all': True
+Escalation repr: 'Educating nurses'
+DEBUG: api_charts - Branch: Educating nurses
+
+DEBUG: get_monthly_data called with escalation='Educating nurses', exclude_camera=False
+DEBUG: Branch: Specific escalation (not Camera/Impact, not 'all') - 'Educating nurses'
+DEBUG: Filtering for escalation (cleaned): 'Educating nurses' (escaped: 'Educating nurses')
+DEBUG: get_monthly_data - escalation='Educating nurses', escaped='Educating nurses'
+DEBUG: SQL Query (first 500 chars): 
+        SELECT 
+            DATE_TRUNC(DATE(timestamp), MONTH) as date,
+            escalation_observation,
+            COUNT(*) as count
+        FROM `prod-tech-project1-bv479-zo027.gsheet_data.nursing_pod_quality_data`
+        WHERE escalation_observation IS NOT NULL 
+        AND escalation_observation != ''
+        AND TRIM(escalation_observation) = 'Educating nurses' AND hospital_name IN ('Shree Narsinh - Balod_ICU Services', 'Shree Vishudhanand - Kolkata', 'Shree Vishudhanand - Kolkata | H
+DEBUG: WHERE clause: TRIM(escalation_observation) = 'Educating nurses' AND hospital_name IN ('Shree Narsinh - Balod_ICU Services', 'Shree Vishudhanand - Kolkata', 'Shree Vishudhanand - Kolkata | HDU', 'Shree Vishudhanand - Kolkata | ICU') AND DATE(timestamp) >= DATE_SUB(CURRENT_DATE(), INTERVAL 90 DAY)
+
+DEBUG: get_filtered_data called with escalation='Educating nurses', email='all', hospital='Shree Narsinh - Balod_ICU Services,Shree Vishudhanand - Kolkata,Shree Vishudhanand - Kolkata | HDU,Shree Vishudhanand - Kolkata | ICU', date='all', exclude_camera=False
+DEBUG: get_filtered_data - WHERE clause: TRIM(escalation_observation) = 'Educating nurses' AND hospital_name IN ('Shree Narsinh - Balod_ICU Services', 'Shree Vishudhanand - Kolkata', 'Shree Vishudhanand - Kolkata | HDU', 'Shree Vishudhanand - Kolkata | ICU') AND DATE(timestamp) >= DATE_SUB(CURRENT_DATE(), INTERVAL 90 DAY)
+DEBUG: get_filtered_data - Number of conditions: 3
+DEBUG: get_filtered_data - Returned 13 rows
+DEBUG: get_filtered_data - Unique escalation types in results: ['Educating nurses']
+DEBUG: get_monthly_data (specific escalation) - returned 3 rows
+DEBUG: Unique escalation types BEFORE filter check: ['Educating nurses']
+
+DEBUG: get_filtered_data called with escalation='Educating nurses', email='all', hospital='Shree Narsinh - Balod_ICU Services,Shree Vishudhanand - Kolkata,Shree Vishudhanand - Kolkata | HDU,Shree Vishudhanand - Kolkata | ICU,Shree Vishudhanand - Kolkata_HDU', date='all', exclude_camera=False
+DEBUG: get_filtered_data - WHERE clause: TRIM(escalation_observation) = 'Educating nurses' AND hospital_name IN ('Shree Narsinh - Balod_ICU Services', 'Shree Vishudhanand - Kolkata', 'Shree Vishudhanand - Kolkata | HDU', 'Shree Vishudhanand - Kolkata | ICU', 'Shree Vishudhanand - Kolkata_HDU') AND DATE(timestamp) >= DATE_SUB(CURRENT_DATE(), INTERVAL 90 DAY)
+DEBUG: get_filtered_data - Number of conditions: 3
+
+=== API CHARTS DEBUG ===
+Received params - escalation: 'Educating nurses' (type: str, length: 16), email: 'all', hospital: 'Shree Narsinh - Balod_ICU Services,Shree Vishudhanand - Kolkata,Shree Vishudhanand - Kolkata | HDU,S...', date: 'all', exclude_camera: False
+Escalation normalized: 'Educating nurses'
+Escalation comparison - == 'all': False, == 'Camera Annotation Events': False, == 'Impact Cases': False, == 'Educating nurses': True, != 'all': True
+Escalation repr: 'Educating nurses'
+DEBUG: api_charts - Branch: Educating nurses
+
+DEBUG: get_monthly_data called with escalation='Educating nurses', exclude_camera=False
+DEBUG: Branch: Specific escalation (not Camera/Impact, not 'all') - 'Educating nurses'
+DEBUG: Filtering for escalation (cleaned): 'Educating nurses' (escaped: 'Educating nurses')
+DEBUG: get_monthly_data - escalation='Educating nurses', escaped='Educating nurses'
+DEBUG: SQL Query (first 500 chars): 
+        SELECT 
+            DATE_TRUNC(DATE(timestamp), MONTH) as date,
+            escalation_observation,
+            COUNT(*) as count
+        FROM `prod-tech-project1-bv479-zo027.gsheet_data.nursing_pod_quality_data`
+        WHERE escalation_observation IS NOT NULL 
+        AND escalation_observation != ''
+        AND TRIM(escalation_observation) = 'Educating nurses' AND hospital_name IN ('Shree Narsinh - Balod_ICU Services', 'Shree Vishudhanand - Kolkata', 'Shree Vishudhanand - Kolkata | H
+DEBUG: WHERE clause: TRIM(escalation_observation) = 'Educating nurses' AND hospital_name IN ('Shree Narsinh - Balod_ICU Services', 'Shree Vishudhanand - Kolkata', 'Shree Vishudhanand - Kolkata | HDU', 'Shree Vishudhanand - Kolkata | ICU', 'Shree Vishudhanand - Kolkata_HDU') AND DATE(timestamp) >= DATE_SUB(CURRENT_DATE(), INTERVAL 90 DAY)
+
+DEBUG: get_filtered_data called with escalation='Educating nurses', email='all', hospital='Shree Narsinh - Balod_ICU Services,Shree Vishudhanand - Kolkata,Shree Vishudhanand - Kolkata | HDU,Shree Vishudhanand - Kolkata | ICU,Shree Vishudhanand - Kolkata_HDU,Shree Vishudhanand - Kolkata_ICU', date='all', exclude_camera=False
+DEBUG: get_filtered_data - WHERE clause: TRIM(escalation_observation) = 'Educating nurses' AND hospital_name IN ('Shree Narsinh - Balod_ICU Services', 'Shree Vishudhanand - Kolkata', 'Shree Vishudhanand - Kolkata | HDU', 'Shree Vishudhanand - Kolkata | ICU', 'Shree Vishudhanand - Kolkata_HDU', 'Shree Vishudhanand - Kolkata_ICU') AND DATE(timestamp) >= DATE_SUB(CURRENT_DATE(), INTERVAL 90 DAY)
+DEBUG: get_filtered_data - Number of conditions: 3
+
+=== API CHARTS DEBUG ===
+Received params - escalation: 'Educating nurses' (type: str, length: 16), email: 'all', hospital: 'Shree Narsinh - Balod_ICU Services,Shree Vishudhanand - Kolkata,Shree Vishudhanand - Kolkata | HDU,S...', date: 'all', exclude_camera: False
+Escalation normalized: 'Educating nurses'
+Escalation comparison - == 'all': False, == 'Camera Annotation Events': False, == 'Impact Cases': False, == 'Educating nurses': True, != 'all': True
+Escalation repr: 'Educating nurses'
+DEBUG: api_charts - Branch: Educating nurses
+127.0.0.1 - - [11/Nov/2025 02:09:52] "GET /api/filter?escalation=Educating+nurses&email=all&hospital=Shree+Narsinh+-+Balod_ICU+Services,Shree+Vishudhanand+-+Kolkata,Shree+Vishudhanand+-+Kolkata+|+HDU,Shree+Vishudhanand+-+Kolkata+|+ICU,Shree+Vishudhanand+-+Kolkata_HDU&date=all&exclude_camera=false HTTP/1.1" 200 -
+/home/sanath/Nursingpod/venv/lib/python3.12/site-packages/_plotly_utils/basevalidators.py:105: FutureWarning:
+
+The behavior of DatetimeProperties.to_pydatetime is deprecated, in a future version this will return a Series containing python datetime objects instead of an ndarray. To retain the old behavior, call `np.array` on the result
+
+/home/sanath/Nursingpod/venv/lib/python3.12/site-packages/_plotly_utils/basevalidators.py:105: FutureWarning:
+
+The behavior of DatetimeProperties.to_pydatetime is deprecated, in a future version this will return a Series containing python datetime objects instead of an ndarray. To retain the old behavior, call `np.array` on the result
+
+127.0.0.1 - - [11/Nov/2025 02:09:52] "GET /api/charts?escalation=Educating+nurses&email=all&hospital=Shree+Narsinh+-+Balod_ICU+Services,Shree+Vishudhanand+-+Kolkata,Shree+Vishudhanand+-+Kolkata+|+HDU,Shree+Vishudhanand+-+Kolkata+|+ICU,Shree+Vishudhanand+-+Kolkata_HDU&date=all&exclude_camera=false HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2025 02:09:52] "GET /api/filter?escalation=Educating+nurses&email=all&hospital=Shree+Narsinh+-+Balod_ICU+Services,Shree+Vishudhanand+-+Kolkata,Shree+Vishudhanand+-+Kolkata+|+HDU,Shree+Vishudhanand+-+Kolkata+|+ICU,Shree+Vishudhanand+-+Kolkata_HDU,Shree+Vishudhanand+-+Kolkata_ICU&date=all&exclude_camera=false HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2025 02:09:53] "GET /api/filter?escalation=Educating+nurses&email=all&hospital=Shree+Narsinh+-+Balod_ICU+Services,Shree+Vishudhanand+-+Kolkata,Shree+Vishudhanand+-+Kolkata+|+HDU,Shree+Vishudhanand+-+Kolkata+|+ICU,Shree+Vishudhanand+-+Kolkata_HDU,Shree+Vishudhanand+-+Kolkata_ICU,Shree+Vishudhanand+-+Kolkata_ICU+Services&date=all&exclude_camera=false HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2025 02:09:53] "GET /api/charts?escalation=Educating+nurses&email=all&hospital=Shree+Narsinh+-+Balod_ICU+Services,Shree+Vishudhanand+-+Kolkata,Shree+Vishudhanand+-+Kolkata+|+HDU,Shree+Vishudhanand+-+Kolkata+|+ICU,Shree+Vishudhanand+-+Kolkata_HDU,Shree+Vishudhanand+-+Kolkata_ICU&date=all&exclude_camera=false HTTP/1.1" 200 -
+/home/sanath/Nursingpod/venv/lib/python3.12/site-packages/_plotly_utils/basevalidators.py:105: FutureWarning:
+
+The behavior of DatetimeProperties.to_pydatetime is deprecated, in a future version this will return a Series containing python datetime objects instead of an ndarray. To retain the old behavior, call `np.array` on the result
+
+127.0.0.1 - - [11/Nov/2025 02:09:54] "GET /api/charts?escalation=Educating+nurses&email=all&hospital=Shree+Narsinh+-+Balod_ICU+Services,Shree+Vishudhanand+-+Kolkata,Shree+Vishudhanand+-+Kolkata+|+HDU,Shree+Vishudhanand+-+Kolkata+|+ICU,Shree+Vishudhanand+-+Kolkata_HDU,Shree+Vishudhanand+-+Kolkata_ICU,Shree+Vishudhanand+-+Kolkata_ICU+Services&date=all&exclude_camera=false HTTP/1.1" 200 -
+/home/sanath/Nursingpod/venv/lib/python3.12/site-packages/_plotly_utils/basevalidators.py:105: FutureWarning:
+
+The behavior of DatetimeProperties.to_pydatetime is deprecated, in a future version this will return a Series containing python datetime objects instead of an ndarray. To retain the old behavior, call `np.array` on the result
+
+127.0.0.1 - - [11/Nov/2025 02:10:08] "GET /api/filter?escalation=Educating+nurses&email=all&hospital=Shree+Narsinh+-+Balod_ICU+Services,Shree+Vishudhanand+-+Kolkata,Shree+Vishudhanand+-+Kolkata+|+HDU,Shree+Vishudhanand+-+Kolkata+|+ICU,Shree+Vishudhanand+-+Kolkata_HDU,Shree+Vishudhanand+-+Kolkata_ICU,Shree+Vishudhanand+-+Kolkata_ICU+Services&date=all&exclude_camera=false HTTP/1.1" 200 -
+127.0.0.1 - - [11/Nov/2025 02:10:09] "GET /api/charts?escalation=Educating+nurses&email=all&hospital=Shree+Narsinh+-+Balod_ICU+Services,Shree+Vishudhanand+-+Kolkata,Shree+Vishudhanand+-+Kolkata+|+HDU,Shree+Vishudhanand+-+Kolkata+|+ICU,Shree+Vishudhanand+-+Kolkata_HDU,Shree+Vishudhanand+-+Kolkata_ICU,Shree+Vishudhanand+-+Kolkata_ICU+Services&date=all&exclude_camera=false HTTP/1.1" 200 -
+
+DEBUG: get_monthly_data called with escalation='Educating nurses', exclude_camera=False
+DEBUG: Branch: Specific escalation (not Camera/Impact, not 'all') - 'Educating nurses'
+DEBUG: Filtering for escalation (cleaned): 'Educating nurses' (escaped: 'Educating nurses')
+DEBUG: get_monthly_data - escalation='Educating nurses', escaped='Educating nurses'
+DEBUG: SQL Query (first 500 chars): 
+        SELECT 
+            DATE_TRUNC(DATE(timestamp), MONTH) as date,
+            escalation_observation,
+            COUNT(*) as count
+        FROM `prod-tech-project1-bv479-zo027.gsheet_data.nursing_pod_quality_data`
+        WHERE escalation_observation IS NOT NULL 
+        AND escalation_observation != ''
+        AND TRIM(escalation_observation) = 'Educating nurses' AND hospital_name IN ('Shree Narsinh - Balod_ICU Services', 'Shree Vishudhanand - Kolkata', 'Shree Vishudhanand - Kolkata | H
+DEBUG: WHERE clause: TRIM(escalation_observation) = 'Educating nurses' AND hospital_name IN ('Shree Narsinh - Balod_ICU Services', 'Shree Vishudhanand - Kolkata', 'Shree Vishudhanand - Kolkata | HDU', 'Shree Vishudhanand - Kolkata | ICU', 'Shree Vishudhanand - Kolkata_HDU', 'Shree Vishudhanand - Kolkata_ICU') AND DATE(timestamp) >= DATE_SUB(CURRENT_DATE(), INTERVAL 90 DAY)
+DEBUG: get_filtered_data - Returned 13 rows
+DEBUG: get_filtered_data - Unique escalation types in results: ['Educating nurses']
+DEBUG: get_monthly_data (specific escalation) - returned 3 rows
+DEBUG: Unique escalation types BEFORE filter check: ['Educating nurses']
+
+DEBUG: get_filtered_data called with escalation='Educating nurses', email='all', hospital='Shree Narsinh - Balod_ICU Services,Shree Vishudhanand - Kolkata,Shree Vishudhanand - Kolkata | HDU,Shree Vishudhanand - Kolkata | ICU,Shree Vishudhanand - Kolkata_HDU,Shree Vishudhanand - Kolkata_ICU,Shree Vishudhanand - Kolkata_ICU Services', date='all', exclude_camera=False
+DEBUG: get_filtered_data - WHERE clause: TRIM(escalation_observation) = 'Educating nurses' AND hospital_name IN ('Shree Narsinh - Balod_ICU Services', 'Shree Vishudhanand - Kolkata', 'Shree Vishudhanand - Kolkata | HDU', 'Shree Vishudhanand - Kolkata | ICU', 'Shree Vishudhanand - Kolkata_HDU', 'Shree Vishudhanand - Kolkata_ICU', 'Shree Vishudhanand - Kolkata_ICU Services') AND DATE(timestamp) >= DATE_SUB(CURRENT_DATE(), INTERVAL 90 DAY)
+DEBUG: get_filtered_data - Number of conditions: 3
+
+=== API CHARTS DEBUG ===
+Received params - escalation: 'Educating nurses' (type: str, length: 16), email: 'all', hospital: 'Shree Narsinh - Balod_ICU Services,Shree Vishudhanand - Kolkata,Shree Vishudhanand - Kolkata | HDU,S...', date: 'all', exclude_camera: False
+Escalation normalized: 'Educating nurses'
+Escalation comparison - == 'all': False, == 'Camera Annotation Events': False, == 'Impact Cases': False, == 'Educating nurses': True, != 'all': True
+Escalation repr: 'Educating nurses'
+DEBUG: api_charts - Branch: Educating nurses
+
+DEBUG: get_monthly_data called with escalation='Educating nurses', exclude_camera=False
+DEBUG: Branch: Specific escalation (not Camera/Impact, not 'all') - 'Educating nurses'
+DEBUG: Filtering for escalation (cleaned): 'Educating nurses' (escaped: 'Educating nurses')
+DEBUG: get_monthly_data - escalation='Educating nurses', escaped='Educating nurses'
+DEBUG: SQL Query (first 500 chars): 
+        SELECT 
+            DATE_TRUNC(DATE(timestamp), MONTH) as date,
+            escalation_observation,
+            COUNT(*) as count
+        FROM `prod-tech-project1-bv479-zo027.gsheet_data.nursing_pod_quality_data`
+        WHERE escalation_observation IS NOT NULL 
+        AND escalation_observation != ''
+        AND TRIM(escalation_observation) = 'Educating nurses' AND hospital_name IN ('Shree Narsinh - Balod_ICU Services', 'Shree Vishudhanand - Kolkata', 'Shree Vishudhanand - Kolkata | H
+DEBUG: WHERE clause: TRIM(escalation_observation) = 'Educating nurses' AND hospital_name IN ('Shree Narsinh - Balod_ICU Services', 'Shree Vishudhanand - Kolkata', 'Shree Vishudhanand - Kolkata | HDU', 'Shree Vishudhanand - Kolkata | ICU', 'Shree Vishudhanand - Kolkata_HDU', 'Shree Vishudhanand - Kolkata_ICU', 'Shree Vishudhanand - Kolkata_ICU Services') AND DATE(timestamp) >= DATE_SUB(CURRENT_DATE(), INTERVAL 90 DAY)
+DEBUG: get_monthly_data (specific escalation) - returned 3 rows
+DEBUG: Unique escalation types BEFORE filter check: ['Educating nurses']
+DEBUG: get_filtered_data - Returned 13 rows
+DEBUG: get_filtered_data - Unique escalation types in results: ['Educating nurses']
+DEBUG: get_filtered_data - Returned 13 rows
+DEBUG: get_filtered_data - Unique escalation types in results: ['Educating nurses']
+DEBUG: get_monthly_data (specific escalation) - returned 3 rows
+DEBUG: Unique escalation types BEFORE filter check: ['Educating nurses']
+
+DEBUG: get_filtered_data called with escalation='Educating nurses', email='all', hospital='Shree Narsinh - Balod_ICU Services,Shree Vishudhanand - Kolkata,Shree Vishudhanand - Kolkata | HDU,Shree Vishudhanand - Kolkata | ICU,Shree Vishudhanand - Kolkata_HDU,Shree Vishudhanand - Kolkata_ICU,Shree Vishudhanand - Kolkata_ICU Services', date='all', exclude_camera=False
+DEBUG: get_filtered_data - WHERE clause: TRIM(escalation_observation) = 'Educating nurses' AND hospital_name IN ('Shree Narsinh - Balod_ICU Services', 'Shree Vishudhanand - Kolkata', 'Shree Vishudhanand - Kolkata | HDU', 'Shree Vishudhanand - Kolkata | ICU', 'Shree Vishudhanand - Kolkata_HDU', 'Shree Vishudhanand - Kolkata_ICU', 'Shree Vishudhanand - Kolkata_ICU Services') AND DATE(timestamp) >= DATE_SUB(CURRENT_DATE(), INTERVAL 90 DAY)
+DEBUG: get_filtered_data - Number of conditions: 3
+
+=== API CHARTS DEBUG ===
+Received params - escalation: 'Educating nurses' (type: str, length: 16), email: 'all', hospital: 'Shree Narsinh - Balod_ICU Services,Shree Vishudhanand - Kolkata,Shree Vishudhanand - Kolkata | HDU,S...', date: 'all', exclude_camera: False
+Escalation normalized: 'Educating nurses'
+Escalation comparison - == 'all': False, == 'Camera Annotation Events': False, == 'Impact Cases': False, == 'Educating nurses': True, != 'all': True
+Escalation repr: 'Educating nurses'
+DEBUG: api_charts - Branch: Educating nurses
+
+DEBUG: get_monthly_data called with escalation='Educating nurses', exclude_camera=False
+DEBUG: Branch: Specific escalation (not Camera/Impact, not 'all') - 'Educating nurses'
+DEBUG: Filtering for escalation (cleaned): 'Educating nurses' (escaped: 'Educating nurses')
+DEBUG: get_monthly_data - escalation='Educating nurses', escaped='Educating nurses'
+DEBUG: SQL Query (first 500 chars): 
+        SELECT 
+            DATE_TRUNC(DATE(timestamp), MONTH) as date,
+            escalation_observation,
+            COUNT(*) as count
+        FROM `prod-tech-project1-bv479-zo027.gsheet_data.nursing_pod_quality_data`
+        WHERE escalation_observation IS NOT NULL 
+        AND escalation_observation != ''
+        AND TRIM(escalation_observation) = 'Educating nurses' AND hospital_name IN ('Shree Narsinh - Balod_ICU Services', 'Shree Vishudhanand - Kolkata', 'Shree Vishudhanand - Kolkata | H
+DEBUG: WHERE clause: TRIM(escalation_observation) = 'Educating nurses' AND hospital_name IN ('Shree Narsinh - Balod_ICU Services', 'Shree Vishudhanand - Kolkata', 'Shree Vishudhanand - Kolkata | HDU', 'Shree Vishudhanand - Kolkata | ICU', 'Shree Vishudhanand - Kolkata_HDU', 'Shree Vishudhanand - Kolkata_ICU', 'Shree Vishudhanand - Kolkata_ICU Services') AND DATE(timestamp) >= DATE_SUB(CURRENT_DATE(), INTERVAL 90 DAY)
+DEBUG: get_monthly_data (specific escalation) - returned 3 rows
+DEBUG: Unique escalation types BEFORE filter check: ['Educating nurses']
+DEBUG: get_filtered_data - Returned 13 rows
+DEBUG: get_filtered_data - Unique escalation types in results: ['Educating nurses']
+
+DEBUG: get_filtered_data called with escalation='Educating nurses', email='all', hospital='Shree Narsinh - Balod_ICU Services,Shree Vishudhanand - Kolkata,Shree Vishudhanand - Kolkata | HDU,Shree Vishudhanand - Kolkata | ICU,Shree Vishudhanand - Kolkata_HDU,Shree Vishudhanand - Kolkata_ICU,Shree Vishudhanand - Kolkata_ICU Services', date='2025-01-01,2025-10-31', exclude_camera=False
+127.0.0.1 - - [11/Nov/2025 02:10:11] "GET /api/filter?escalation=Educating+nurses&email=all&hospital=Shree+Narsinh+-+Balod_ICU+Services,Shree+Vishudhanand+-+Kolkata,Shree+Vishudhanand+-+Kolkata+|+HDU,Shree+Vishudhanand+-+Kolkata+|+ICU,Shree+Vishudhanand+-+Kolkata_HDU,Shree+Vishudhanand+-+Kolkata_ICU,Shree+Vishudhanand+-+Kolkata_ICU+Services&date=2025-01-01,2025-10-31&exclude_camera=false HTTP/1.1" 200 -
+/home/sanath/Nursingpod/venv/lib/python3.12/site-packages/_plotly_utils/basevalidators.py:105: FutureWarning:
+
+The behavior of DatetimeProperties.to_pydatetime is deprecated, in a future version this will return a Series containing python datetime objects instead of an ndarray. To retain the old behavior, call `np.array` on the result
+
+127.0.0.1 - - [11/Nov/2025 02:10:12] "GET /api/charts?escalation=Educating+nurses&email=all&hospital=Shree+Narsinh+-+Balod_ICU+Services,Shree+Vishudhanand+-+Kolkata,Shree+Vishudhanand+-+Kolkata+|+HDU,Shree+Vishudhanand+-+Kolkata+|+ICU,Shree+Vishudhanand+-+Kolkata_HDU,Shree+Vishudhanand+-+Kolkata_ICU,Shree+Vishudhanand+-+Kolkata_ICU+Services&date=2025-01-01,2025-10-31&exclude_camera=false HTTP/1.1" 200 -

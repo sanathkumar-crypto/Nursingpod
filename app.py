@@ -49,12 +49,15 @@ login_manager.login_view = 'login_page'
 login_manager.login_message = 'Please log in to access the dashboard.'
 login_manager.login_message_category = 'info'
 
-# OAuth2 Configuration
-CLIENT_ID = os.getenv('GOOGLE_CLIENT_ID')
-CLIENT_SECRET = os.getenv('GOOGLE_CLIENT_SECRET')
-SCOPES = ['openid', 'https://www.googleapis.com/auth/userinfo.email', 'https://www.googleapis.com/auth/userinfo.profile']
-REDIRECT_URI = os.getenv('REDIRECT_URI', 'http://localhost:5000/callback')
-ALLOWED_DOMAIN = '@cloudphysician.net'
+# DISABLE LOGIN FOR DIRECT ACCESS (OAuth commented out)
+app.config['LOGIN_DISABLED'] = True
+
+# OAuth2 Configuration - COMMENTED OUT FOR DIRECT ACCESS
+# CLIENT_ID = os.getenv('GOOGLE_CLIENT_ID')
+# CLIENT_SECRET = os.getenv('GOOGLE_CLIENT_SECRET')
+# SCOPES = ['openid', 'https://www.googleapis.com/auth/userinfo.email', 'https://www.googleapis.com/auth/userinfo.profile']
+# REDIRECT_URI = os.getenv('REDIRECT_URI', 'http://localhost:5000/callback')
+# ALLOWED_DOMAIN = '@cloudphysician.net'
 
 # Initialize BigQuery client
 client = bigquery.Client()
@@ -314,6 +317,12 @@ def get_filter_options():
 
 def get_filtered_data(escalation='all', email='all', hospital='all', date='all', exclude_camera=False):
     """Get filtered data based on selected filters"""
+    # URL decode and normalize escalation
+    escalation = unquote(str(escalation)).strip() if escalation != 'all' else 'all'
+    
+    # Debug logging
+    print(f"\nDEBUG: get_filtered_data called with escalation='{escalation}', email='{email}', hospital='{hospital}', date='{date}', exclude_camera={exclude_camera}")
+    
     # If exclude_camera is True and escalation is Camera Annotation Events, return empty
     if escalation == 'Camera Annotation Events' and exclude_camera:
         return pd.DataFrame()
@@ -366,8 +375,13 @@ def get_filtered_data(escalation='all', email='all', hospital='all', date='all',
         if hospital_condition:
             where_conditions.append(hospital_condition)
         
-        # Handle date range filtering (Impact Cases doesn't have timestamp, so we'll skip date filtering for now)
-        # Note: Impact Cases table doesn't have timestamp column, so date filtering is not applicable
+        # Handle date range filtering - Impact Cases table has timestamp column
+        if date != 'all' and ',' in date:
+            start_date, end_date = date.split(',')
+            where_conditions.append(f"DATE(timestamp) >= '{start_date}' AND DATE(timestamp) <= '{end_date}'")
+        elif date != 'all':
+            where_conditions.append(f"DATE(timestamp) = '{date}'")
+        # Note: When date='all', we don't add a date filter to show all Impact Cases data
         
         where_clause = " AND ".join(where_conditions) if where_conditions else "1=1"
         
@@ -386,8 +400,10 @@ def get_filtered_data(escalation='all', email='all', hospital='all', date='all',
         where_conditions = []
         
         if escalation != 'all':
-            escaped_escalation = escape_sql_string(escalation)
-            where_conditions.append(f"escalation_observation = '{escaped_escalation}'")
+            # Clean and escape escalation - use TRIM to handle any leading/trailing spaces
+            escalation_clean = escalation.strip()
+            escaped_escalation = escape_sql_string(escalation_clean)
+            where_conditions.append(f"TRIM(escalation_observation) = '{escaped_escalation}'")
         
         if email != 'all':
             escaped_email = escape_sql_string(email)
@@ -404,8 +420,15 @@ def get_filtered_data(escalation='all', email='all', hospital='all', date='all',
             where_conditions.append(f"DATE(timestamp) >= '{start_date}' AND DATE(timestamp) <= '{end_date}'")
         elif date != 'all':
             where_conditions.append(f"DATE(timestamp) = '{date}'")
+        else:
+            # Default to recent data (last 90 days) if no date specified for better performance
+            where_conditions.append("DATE(timestamp) >= DATE_SUB(CURRENT_DATE(), INTERVAL 90 DAY)")
         
-        where_clause = " AND ".join(where_conditions) if where_conditions else "1=1"
+        where_clause = " AND ".join(where_conditions) if where_conditions else "DATE(timestamp) >= DATE_SUB(CURRENT_DATE(), INTERVAL 90 DAY)"
+        
+        # Debug logging
+        print(f"DEBUG: get_filtered_data - WHERE clause: {where_clause}")
+        print(f"DEBUG: get_filtered_data - Number of conditions: {len(where_conditions)}")
         
         query = f"""
         SELECT *
@@ -416,6 +439,11 @@ def get_filtered_data(escalation='all', email='all', hospital='all', date='all',
         """
         
         df = client.query(query).result().to_dataframe()
+        print(f"DEBUG: get_filtered_data - Returned {len(df)} rows")
+        if not df.empty and escalation != 'all':
+            unique_escalations = df['escalation_observation'].str.strip().unique().tolist() if 'escalation_observation' in df.columns else []
+            print(f"DEBUG: get_filtered_data - Unique escalation types in results: {unique_escalations}")
+        
         return df
 
 def get_monthly_data(escalation='all', email='all', hospital='all', date='all', exclude_camera=False):
@@ -458,16 +486,15 @@ def get_monthly_data(escalation='all', email='all', hospital='all', date='all', 
         
         query = f"""
         SELECT 
-            EXTRACT(YEAR FROM timestamp) as year,
-            EXTRACT(MONTH FROM timestamp) as month,
+            DATE_TRUNC(DATE(timestamp), MONTH) as date,
             "Camera Annotation Events" as escalation_observation,
             COUNT(*) as count
         FROM `prod-tech-project1-bv479-zo027.mongodb.camera_annotation_events`
         WHERE event_name IS NOT NULL 
         AND event_name != ''
         AND {where_clause}
-        GROUP BY year, month
-        ORDER BY year, month
+        GROUP BY DATE_TRUNC(DATE(timestamp), MONTH)
+        ORDER BY DATE_TRUNC(DATE(timestamp), MONTH)
         """
         
         df = client.query(query).result().to_dataframe()
@@ -492,21 +519,21 @@ def get_monthly_data(escalation='all', email='all', hospital='all', date='all', 
             where_conditions.append(f"DATE(timestamp) >= '{start_date}' AND DATE(timestamp) <= '{end_date}'")
         elif date != 'all':
             where_conditions.append(f"DATE(timestamp) = '{date}'")
+        # Note: When date='all', we don't add a date filter to show all Impact Cases data
         
         where_clause = " AND ".join(where_conditions) if where_conditions else "1=1"
         
         query = f"""
         SELECT 
-            EXTRACT(YEAR FROM timestamp) as year,
-            EXTRACT(MONTH FROM timestamp) as month,
+            DATE_TRUNC(DATE(timestamp), MONTH) as date,
             "Impact Cases" as escalation_observation,
             COUNT(*) as count
         FROM `prod-tech-project1-bv479-zo027.gsheet_data.impact_cases`
         WHERE impact_type IS NOT NULL 
         AND impact_type != ''
         AND {where_clause}
-        GROUP BY year, month
-        ORDER BY year, month
+        GROUP BY DATE_TRUNC(DATE(timestamp), MONTH)
+        ORDER BY DATE_TRUNC(DATE(timestamp), MONTH)
         """
         
         df = client.query(query).result().to_dataframe()
@@ -541,21 +568,23 @@ def get_monthly_data(escalation='all', email='all', hospital='all', date='all', 
             where_conditions.append(f"DATE(timestamp) >= '{start_date}' AND DATE(timestamp) <= '{end_date}'")
         elif date != 'all':
             where_conditions.append(f"DATE(timestamp) = '{date}'")
+        else:
+            # Default to recent data (last 90 days) if no date specified for better performance
+            where_conditions.append("DATE(timestamp) >= DATE_SUB(CURRENT_DATE(), INTERVAL 90 DAY)")
         
-        where_clause = " AND ".join(where_conditions) if where_conditions else "1=1"
+        where_clause = " AND ".join(where_conditions) if where_conditions else "DATE(timestamp) >= DATE_SUB(CURRENT_DATE(), INTERVAL 90 DAY)"
         
         query = f"""
         SELECT 
-            EXTRACT(YEAR FROM timestamp) as year,
-            EXTRACT(MONTH FROM timestamp) as month,
+            DATE_TRUNC(DATE(timestamp), MONTH) as date,
             escalation_observation,
             COUNT(*) as count
         FROM `prod-tech-project1-bv479-zo027.gsheet_data.nursing_pod_quality_data`
         WHERE escalation_observation IS NOT NULL 
         AND escalation_observation != ''
         AND {where_clause}
-        GROUP BY year, month, escalation_observation
-        ORDER BY year, month
+        GROUP BY DATE_TRUNC(DATE(timestamp), MONTH), escalation_observation
+        ORDER BY DATE_TRUNC(DATE(timestamp), MONTH)
         """
         
         # Debug: Print query
@@ -618,20 +647,22 @@ def get_monthly_data(escalation='all', email='all', hospital='all', date='all', 
             where_conditions.append(f"DATE(timestamp) >= '{start_date}' AND DATE(timestamp) <= '{end_date}'")
         elif date != 'all':
             where_conditions.append(f"DATE(timestamp) = '{date}'")
+        else:
+            # Default to recent data (last 90 days) if no date specified for better performance
+            where_conditions.append("DATE(timestamp) >= DATE_SUB(CURRENT_DATE(), INTERVAL 90 DAY)")
         
-        where_clause = " AND ".join(where_conditions) if where_conditions else "1=1"
+        where_clause = " AND ".join(where_conditions) if where_conditions else "DATE(timestamp) >= DATE_SUB(CURRENT_DATE(), INTERVAL 90 DAY)"
         
         query1 = f"""
         SELECT 
-            EXTRACT(YEAR FROM timestamp) as year,
-            EXTRACT(MONTH FROM timestamp) as month,
+            DATE_TRUNC(DATE(timestamp), MONTH) as date,
             escalation_observation,
             COUNT(*) as count
         FROM `prod-tech-project1-bv479-zo027.gsheet_data.nursing_pod_quality_data`
         WHERE escalation_observation IS NOT NULL 
         AND escalation_observation != ''
         AND {where_clause}
-        GROUP BY year, month, escalation_observation
+        GROUP BY DATE_TRUNC(DATE(timestamp), MONTH), escalation_observation
         """
         
         df1 = client.query(query1).result().to_dataframe()
@@ -654,20 +685,20 @@ def get_monthly_data(escalation='all', email='all', hospital='all', date='all', 
             where_conditions_impact.append(f"DATE(timestamp) >= '{start_date}' AND DATE(timestamp) <= '{end_date}'")
         elif date != 'all':
             where_conditions_impact.append(f"DATE(timestamp) = '{date}'")
+        # Note: When date='all', we don't add a date filter to show all Impact Cases data
         
         where_clause_impact = " AND ".join(where_conditions_impact) if where_conditions_impact else "1=1"
         
         query2 = f"""
         SELECT 
-            EXTRACT(YEAR FROM timestamp) as year,
-            EXTRACT(MONTH FROM timestamp) as month,
+            DATE_TRUNC(DATE(timestamp), MONTH) as date,
             "Impact Cases" as escalation_observation,
             COUNT(*) as count
         FROM `prod-tech-project1-bv479-zo027.gsheet_data.impact_cases`
         WHERE impact_type IS NOT NULL 
         AND impact_type != ''
         AND {where_clause_impact}
-        GROUP BY year, month
+        GROUP BY DATE_TRUNC(DATE(timestamp), MONTH)
         """
         
         df2 = client.query(query2).result().to_dataframe()
@@ -698,15 +729,14 @@ def get_monthly_data(escalation='all', email='all', hospital='all', date='all', 
             
             query3 = f"""
             SELECT 
-                EXTRACT(YEAR FROM timestamp) as year,
-                EXTRACT(MONTH FROM timestamp) as month,
+                DATE_TRUNC(DATE(timestamp), MONTH) as date,
                 "Camera Annotation Events" as escalation_observation,
                 COUNT(*) as count
             FROM `prod-tech-project1-bv479-zo027.mongodb.camera_annotation_events`
             WHERE event_name IS NOT NULL 
             AND event_name != ''
             AND {where_clause_camera}
-            GROUP BY year, month
+            GROUP BY DATE_TRUNC(DATE(timestamp), MONTH)
             """
             
             df3 = client.query(query3).result().to_dataframe()
@@ -718,496 +748,498 @@ def get_monthly_data(escalation='all', email='all', hospital='all', date='all', 
         # Combine all dataframes
         if dfs:
             df = pd.concat(dfs, ignore_index=True)
-            df = df.groupby(['year', 'month', 'escalation_observation'])['count'].sum().reset_index()
+            df = df.groupby(['date', 'escalation_observation'])['count'].sum().reset_index()
             
             # Filter out "Camera Annotation Events" if exclude_camera is True (safety check)
             if exclude_camera:
                 df = df[df['escalation_observation'] != 'Camera Annotation Events'].copy()
             
-            df = df.sort_values(['year', 'month', 'escalation_observation'])
+            df = df.sort_values(['date', 'escalation_observation'])
             return df
         else:
             return pd.DataFrame()
 
-def get_google_flow():
-    """Create and return a Google OAuth flow with timeout configuration"""
-    client_config = {
-        "web": {
-            "client_id": CLIENT_ID,
-            "client_secret": CLIENT_SECRET,
-            "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-            "token_uri": "https://oauth2.googleapis.com/token",
-            "redirect_uris": [REDIRECT_URI]
-        }
-    }
-    flow = Flow.from_client_config(
-        client_config,
-        scopes=SCOPES,
-        redirect_uri=REDIRECT_URI
-    )
-    # Configure timeout on the underlying requests session
-    # This prevents the request from hanging indefinitely
-    if hasattr(flow, 'oauth2session') and hasattr(flow.oauth2session, 'request'):
-        # Set default timeout for requests made by this session
-        original_request = flow.oauth2session.request
-        def request_with_timeout(*args, **kwargs):
-            if 'timeout' not in kwargs:
-                kwargs['timeout'] = (10, 30)  # (connect timeout, read timeout) in seconds
-            return original_request(*args, **kwargs)
-        flow.oauth2session.request = request_with_timeout
-    return flow
+# OAuth flow function - COMMENTED OUT FOR DIRECT ACCESS
+# def get_google_flow():
+#     """Create and return a Google OAuth flow with timeout configuration"""
+#     client_config = {
+#         "web": {
+#             "client_id": CLIENT_ID,
+#             "client_secret": CLIENT_SECRET,
+#             "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+#             "token_uri": "https://oauth2.googleapis.com/token",
+#             "redirect_uris": [REDIRECT_URI]
+#         }
+#     }
+#     flow = Flow.from_client_config(
+#         client_config,
+#         scopes=SCOPES,
+#         redirect_uri=REDIRECT_URI
+#     )
+#     # Configure timeout on the underlying requests session
+#     # This prevents the request from hanging indefinitely
+#     if hasattr(flow, 'oauth2session') and hasattr(flow.oauth2session, 'request'):
+#         # Set default timeout for requests made by this session
+#         original_request = flow.oauth2session.request
+#         def request_with_timeout(*args, **kwargs):
+#             if 'timeout' not in kwargs:
+#                 kwargs['timeout'] = (10, 30)  # (connect timeout, read timeout) in seconds
+#             return original_request(*args, **kwargs)
+#         flow.oauth2session.request = request_with_timeout
+#     return flow
 
-@app.route('/login')
-def login():
-    """Login page - redirects to Google OAuth"""
-    # If already logged in, redirect to dashboard
-    if current_user.is_authenticated:
-        return redirect(url_for('index'))
-    
-    # If OAuth not configured, show error
-    if not CLIENT_ID or not CLIENT_SECRET:
-        response = make_response(render_template('error.html', 
-                              error_title='OAuth Not Configured',
-                              error_message='Google OAuth credentials are not configured. Please set GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET environment variables.'))
-        response.status_code = 500
-        return response
-    
-    # Validate redirect URI
-    if not REDIRECT_URI:
-        response = make_response(render_template('error.html', 
-                              error_title='Configuration Error',
-                              error_message='REDIRECT_URI is not configured. Please set it in your .env file.'))
-        response.status_code = 500
-        return response
-    
-    # Debug logging
-    print(f"OAuth Login - Redirect URI: {REDIRECT_URI}")
-    print(f"OAuth Login - Client ID: {CLIENT_ID[:20]}...")
-    
-    # Clear any existing state from previous login attempts to prevent conflicts
-    remnant_state = session.get('state')
-    if remnant_state:
-        print(f"⚠️ Found previous state in session: {remnant_state[:20]}... (clearing it)")
-        session.pop('state', None)
-        session.pop('oauth_start_time', None)
-    
-    # Make session permanent to ensure it persists across the OAuth flow
-    session.permanent = True
-    session.modified = True  # Mark session as modified to force save
-    
-    # Initiate OAuth flow
-    try:
-        flow = get_google_flow()
-        authorization_url, state = flow.authorization_url(
-            access_type='offline',
-            include_granted_scopes='true',
-            prompt='select_account'
-        )
-        session['state'] = state
-        session['oauth_start_time'] = datetime.now().isoformat()
-        # Force session save to ensure state persists across redirect
-        session.permanent = True
-        session.modified = True
-        
-        print(f"Generated new state: {state[:20]}...")
-        print(f"Generated authorization URL (first 100 chars): {authorization_url[:100]}...")
-        
-        # Create response and ensure session is saved
-        response = redirect(authorization_url)
-        # Explicitly save session by ensuring it's in the response
-        # Flask will automatically save the session when response is returned
-        # But we need to make sure session is marked as modified
-        return response
-    except Exception as e:
-        print(f"Error generating authorization URL: {str(e)}")
-        response = make_response(render_template('error.html',
-                              error_title='OAuth Configuration Error',
-                              error_message=f'Failed to generate authorization URL: {str(e)}. Please check your OAuth credentials and redirect URI configuration.'))
-        response.status_code = 500
-        return response
+# OAuth login route - COMMENTED OUT FOR DIRECT ACCESS
+# @app.route('/login')
+# def login():
+#     """Login page - redirects to Google OAuth"""
+#     # If already logged in, redirect to dashboard
+#     if current_user.is_authenticated:
+#         return redirect(url_for('index'))
+#     
+#     # If OAuth not configured, show error
+#     if not CLIENT_ID or not CLIENT_SECRET:
+#         response = make_response(render_template('error.html', 
+#                               error_title='OAuth Not Configured',
+#                               error_message='Google OAuth credentials are not configured. Please set GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET environment variables.'))
+#         response.status_code = 500
+#         return response
+#     
+#     # Validate redirect URI
+#     if not REDIRECT_URI:
+#         response = make_response(render_template('error.html', 
+#                               error_title='Configuration Error',
+#                               error_message='REDIRECT_URI is not configured. Please set it in your .env file.'))
+#         response.status_code = 500
+#         return response
+#     
+#     # Debug logging
+#     print(f"OAuth Login - Redirect URI: {REDIRECT_URI}")
+#     print(f"OAuth Login - Client ID: {CLIENT_ID[:20]}...")
+#     
+#     # Clear any existing state from previous login attempts to prevent conflicts
+#     remnant_state = session.get('state')
+#     if remnant_state:
+#         print(f"⚠️ Found previous state in session: {remnant_state[:20]}... (clearing it)")
+#         session.pop('state', None)
+#         session.pop('oauth_start_time', None)
+#     
+#     # Make session permanent to ensure it persists across the OAuth flow
+#     session.permanent = True
+#     session.modified = True  # Mark session as modified to force save
+#     
+#     # Initiate OAuth flow
+#     try:
+#         flow = get_google_flow()
+#         authorization_url, state = flow.authorization_url(
+#             access_type='offline',
+#             include_granted_scopes='true',
+#             prompt='select_account'
+#         )
+#         session['state'] = state
+#         session['oauth_start_time'] = datetime.now().isoformat()
+#         # Force session save to ensure state persists across redirect
+#         session.permanent = True
+#         session.modified = True
+#         
+#         print(f"Generated new state: {state[:20]}...")
+#         print(f"Generated authorization URL (first 100 chars): {authorization_url[:100]}...")
+#         
+#         # Create response and ensure session is saved
+#         response = redirect(authorization_url)
+#         # Explicitly save session by ensuring it's in the response
+#         # Flask will automatically save the session when response is returned
+#         # But we need to make sure session is marked as modified
+#         return response
+#     except Exception as e:
+#         print(f"Error generating authorization URL: {str(e)}")
+#         response = make_response(render_template('error.html',
+#                               error_title='OAuth Configuration Error',
+#                               error_message=f'Failed to generate authorization URL: {str(e)}. Please check your OAuth credentials and redirect URI configuration.'))
+#         response.status_code = 500
+#         return response
 
 @app.route('/login-page')
 def login_page():
-    """Show login page template"""
-    if current_user.is_authenticated:
-        return redirect(url_for('index'))
-    return render_template('login.html')
+    """Show login page template - Redirects to index since OAuth is disabled"""
+    # Redirect directly to index since authentication is disabled
+    return redirect(url_for('index'))
 
-@app.route('/callback')
-def callback():
-    """Handle Google OAuth callback"""
-    # Check for OAuth errors first
-    if 'error' in request.args:
-        error_msg = request.args.get('error_description', request.args.get('error', 'Authentication failed.'))
-        response = make_response(render_template('error.html',
-                              error_title='Authentication Error',
-                              error_message=error_msg))
-        response.status_code = 403
-        return response
+# OAuth callback route - COMMENTED OUT FOR DIRECT ACCESS
+# @app.route('/callback')
+# def callback():
+#     """Handle Google OAuth callback"""
+#     # Check for OAuth errors first
+#     if 'error' in request.args:
+#         error_msg = request.args.get('error_description', request.args.get('error', 'Authentication failed.'))
+#         response = make_response(render_template('error.html',
+#                               error_title='Authentication Error',
+#                               error_message=error_msg))
+#         response.status_code = 403
+#         return response
     
     # Check if code is present
-    if 'code' not in request.args:
-        response = make_response(render_template('error.html',
-                              error_title='Missing Authorization Code',
-                              error_message='No authorization code received from Google. Please try logging in again.'))
-        response.status_code = 400
-        return response
+#    if 'code' not in request.args:
+#        response = make_response(render_template('error.html',
+#                              error_title='Missing Authorization Code',
+#                              error_message='No authorization code received from Google. Please try logging in again.'))
+#        response.status_code = 400
+#        return response
     
     # Check session state
-    if 'state' not in session:
-        response = make_response(render_template('error.html',
-                              error_title='Session Error',
-                              error_message='Session expired. Please try logging in again.'))
-        response.status_code = 400
-        return response
+#    if 'state' not in session:
+#        response = make_response(render_template('error.html',
+#                              error_title='Session Error',
+#                              error_message='Session expired. Please try logging in again.'))
+#        response.status_code = 400
+#        return response
     
     # Verify state parameter (CRITICAL: Must match exactly)
-    request_state = request.args.get('state')
-    session_state = session.get('state')
+#    request_state = request.args.get('state')
+#    session_state = session.get('state')
     
-    if request_state != session_state:
-        print(f"❌ State mismatch detected!")
-        print(f"   Request state: '{request_state}'")
-        print(f"   Session state: '{session_state}'")
-        print(f"   Session keys: {list(session.keys())}")
-        print(f"   OAuth start time: {session.get('oauth_start_time', 'Not found')}")
+#    if request_state != session_state:
+#        print(f"❌ State mismatch detected!")
+#        print(f"   Request state: '{request_state}'")
+#        print(f"   Session state: '{session_state}'")
+#        print(f"   Session keys: {list(session.keys())}")
+#        print(f"   OAuth start time: {session.get('oauth_start_time', 'Not found')}")
         
         # Check if this is an old callback from a previous login attempt
-        oauth_start_time_str = session.get('oauth_start_time')
-        if oauth_start_time_str:
-            try:
-                from datetime import datetime
-                start_time = datetime.fromisoformat(oauth_start_time_str)
-                elapsed = (datetime.now() - start_time).total_seconds()
-                print(f"   Time since OAuth start: {elapsed:.1f} seconds")
-                if elapsed > 300:  # 5 minutes
-                    print(f"   ⚠️ This appears to be a very old OAuth attempt ({elapsed:.0f} seconds ago)")
-            except:
-                pass
+#        oauth_start_time_str = session.get('oauth_start_time')
+#        if oauth_start_time_str:
+#            try:
+#                from datetime import datetime
+#                start_time = datetime.fromisoformat(oauth_start_time_str)
+#                elapsed = (datetime.now() - start_time).total_seconds()
+#                print(f"   Time since OAuth start: {elapsed:.1f} seconds")
+#                if elapsed > 300:  # 5 minutes
+#                    print(f"   ⚠️ This appears to be a very old OAuth attempt ({elapsed:.0f} seconds ago)")
+#            except:
+#                pass
         
         # Provide helpful error message with troubleshooting steps
-        error_message = """<strong>Invalid state parameter - Session Mismatch</strong><br><br>This usually means the OAuth callback state doesn't match the session state.<br><br><strong>Common causes:</strong><br>• Multiple browser tabs/windows open (one with old login attempt)<br>• Session cookies were cleared between login and callback<br>• Previous login attempt still completing<br><br><strong>To fix:</strong><br>1. <strong>Close ALL browser tabs</strong> for localhost:5000<br>2. Clear browser cookies for localhost<br>3. Open a fresh browser window/tab<br>4. Try logging in again (click login only once)<br><br>If the problem persists, try using an incognito/private browser window."""
-        response = make_response(render_template('error.html',
-                              error_title='Security Error - State Mismatch',
-                              error_message=error_message))
-        response.status_code = 400
+#        error_message = """<strong>Invalid state parameter - Session Mismatch</strong><br><br>This usually means the OAuth callback state doesn't match the session state.<br><br><strong>Common causes:</strong><br>• Multiple browser tabs/windows open (one with old login attempt)<br>• Session cookies were cleared between login and callback<br>• Previous login attempt still completing<br><br><strong>To fix:</strong><br>1. <strong>Close ALL browser tabs</strong> for localhost:5000<br>2. Clear browser cookies for localhost<br>3. Open a fresh browser window/tab<br>4. Try logging in again (click login only once)<br><br>If the problem persists, try using an incognito/private browser window."""
+#        response = make_response(render_template('error.html',
+#                              error_title='Security Error - State Mismatch',
+#                              error_message=error_message))
+#        response.status_code = 400
         # Clear the stale state from session
-        session.pop('state', None)
-        session.pop('oauth_start_time', None)
-        return response
+#        session.pop('state', None)
+#        session.pop('oauth_start_time', None)
+#        return response
     
-    try:
+#    try:
         # Debug logging
-        print(f"\n=== OAuth Callback Debug ===")
-        print(f"Full callback URL: {request.url}")
-        print(f"Redirect URI configured in app: {REDIRECT_URI}")
-        print(f"Code parameter present: {'code' in request.args}")
-        print(f"State from request: {request.args.get('state', 'NOT PROVIDED')}")
-        print(f"State from session: {session.get('state', 'NOT IN SESSION')}")
-        print(f"Error from request (if any): {request.args.get('error', 'None')}")
-        print(f"Error description (if any): {request.args.get('error_description', 'None')}")
+#        print(f"\n=== OAuth Callback Debug ===")
+#        print(f"Full callback URL: {request.url}")
+#        print(f"Redirect URI configured in app: {REDIRECT_URI}")
+#        print(f"Code parameter present: {'code' in request.args}")
+#        print(f"State from request: {request.args.get('state', 'NOT PROVIDED')}")
+#        print(f"State from session: {session.get('state', 'NOT IN SESSION')}")
+#        print(f"Error from request (if any): {request.args.get('error', 'None')}")
+#        print(f"Error description (if any): {request.args.get('error_description', 'None')}")
         
         # Check if Google returned an error
-        if 'error' in request.args:
-            error = request.args.get('error')
-            error_desc = request.args.get('error_description', 'No description provided')
-            print(f"\n❌ Google OAuth Error: {error}")
-            print(f"   Description: {error_desc}")
+#        if 'error' in request.args:
+#            error = request.args.get('error')
+#            error_desc = request.args.get('error_description', 'No description provided')
+#            print(f"\n❌ Google OAuth Error: {error}")
+#            print(f"   Description: {error_desc}")
             
             # Provide specific guidance based on error type
-            if 'redirect_uri_mismatch' in error.lower():
-                guidance = f"""
-                REDIRECT URI MISMATCH ERROR
+#            if 'redirect_uri_mismatch' in error.lower():
+#                guidance = f"""
+#                REDIRECT URI MISMATCH ERROR
                 
-                The redirect URI in your request does not match what's configured in Google Cloud Console.
+#                The redirect URI in your request does not match what's configured in Google Cloud Console.
                 
-                Your app is configured with: {REDIRECT_URI}
+#                Your app is configured with: {REDIRECT_URI}
                 
-                To fix this:
-                1. Go to: https://console.cloud.google.com/apis/credentials
-                2. Find your OAuth 2.0 Client ID
-                3. Click Edit
-                4. Under "Authorized redirect URIs", add EXACTLY:
-                   {REDIRECT_URI}
+#                To fix this:
+#                1. Go to: https://console.cloud.google.com/apis/credentials
+#                2. Find your OAuth 2.0 Client ID
+#                3. Click Edit
+#                4. Under "Authorized redirect URIs", add EXACTLY:
+#                   {REDIRECT_URI}
                 
-                5. Make sure:
-                   - No trailing slash
-                   - Protocol matches (http:// not https:// for localhost)
-                   - Port number matches (5000)
-                   - Case sensitive
+#                5. Make sure:
+#                   - No trailing slash
+#                   - Protocol matches (http:// not https:// for localhost)
+#                   - Port number matches (5000)
+#                   - Case sensitive
                 
-                6. Save and wait 1-2 minutes for changes to propagate
-                """
-                response = make_response(render_template('error.html',
-                                  error_title='Redirect URI Mismatch',
-                                  error_message=f'{error_desc}\n\n{guidance}'))
-                response.status_code = 400
-                return response
-            elif 'access_denied' in error.lower():
-                guidance = "You denied access to the application. Please try logging in again and grant permissions."
-                response = make_response(render_template('error.html',
-                                  error_title='Access Denied',
-                                  error_message=guidance))
-                response.status_code = 403
-                return response
-            else:
-                response = make_response(render_template('error.html',
-                                  error_title='OAuth Error',
-                                  error_message=f'{error}: {error_desc}'))
-                response.status_code = 400
-                return response
+#                6. Save and wait 1-2 minutes for changes to propagate
+#                """
+#                response = make_response(render_template('error.html',
+#                                  error_title='Redirect URI Mismatch',
+#                                  error_message=f'{error_desc}\n\n{guidance}'))
+#                response.status_code = 400
+#                return response
+#            elif 'access_denied' in error.lower():
+#                guidance = "You denied access to the application. Please try logging in again and grant permissions."
+#                response = make_response(render_template('error.html',
+#                                  error_title='Access Denied',
+#                                  error_message=guidance))
+#                response.status_code = 403
+#                return response
+#            else:
+#                response = make_response(render_template('error.html',
+#                                  error_title='OAuth Error',
+#                                  error_message=f'{error}: {error_desc}'))
+#                response.status_code = 400
+#                return response
         
         # Create flow
-        flow = get_google_flow()
+#        flow = get_google_flow()
         
         # Fetch token from Google
-        print("🔄 Starting token exchange with Google...")
-        try:
-            import time
-            import socket
-            from requests.exceptions import ConnectionError, Timeout
+#        print("🔄 Starting token exchange with Google...")
+#        try:
+#            import time
+#            import socket
+#            from requests.exceptions import ConnectionError, Timeout
             
             # Set socket timeout to prevent hanging
-            original_timeout = socket.getdefaulttimeout()
-            socket.setdefaulttimeout(30)  # 30 second timeout
+#            original_timeout = socket.getdefaulttimeout()
+#            socket.setdefaulttimeout(30)  # 30 second timeout
             
-            start_time = time.time()
+#            start_time = time.time()
             
             # Retry logic for transient network/DNS errors
-            max_retries = 3
-            retry_count = 0
-            last_error = None
+#            max_retries = 3
+#            retry_count = 0
+#            last_error = None
             
-            while retry_count < max_retries:
-                try:
+#            while retry_count < max_retries:
+#                try:
                     # Create a fresh flow for each retry attempt if needed
-                    if retry_count > 0:
-                        flow = get_google_flow()
-                        print(f"   Retry attempt {retry_count}/{max_retries}...")
+#                    if retry_count > 0:
+#                        flow = get_google_flow()
+#                        print(f"   Retry attempt {retry_count}/{max_retries}...")
                     
                     # Direct fetch (timeout handled by requests library timeout configuration)
                     # The timeout is configured in get_google_flow() function (10s connect, 30s read)
-                    flow.fetch_token(authorization_response=request.url)
-                    elapsed = time.time() - start_time
-                    print(f"✅ Token exchange completed in {elapsed:.2f} seconds")
-                    credentials = flow.credentials
-                    break  # Success, exit retry loop
+#                    flow.fetch_token(authorization_response=request.url)
+#                    elapsed = time.time() - start_time
+#                    print(f"✅ Token exchange completed in {elapsed:.2f} seconds")
+#                    credentials = flow.credentials
+#                    break  # Success, exit retry loop
                     
-                except (socket.gaierror, ConnectionError, OSError, Timeout) as network_error:
-                    retry_count += 1
-                    last_error = network_error
-                    error_str = str(network_error).lower()
+#                except (socket.gaierror, ConnectionError, OSError, Timeout) as network_error:
+#                    retry_count += 1
+#                    last_error = network_error
+#                    error_str = str(network_error).lower()
                     
-                    if 'name resolution' in error_str or 'name_not_resolved' in error_str or 'failed to resolve' in error_str:
-                        print(f"⚠️ DNS resolution error (attempt {retry_count}/{max_retries})")
-                        if retry_count < max_retries:
-                            wait_time = retry_count * 2  # Exponential backoff: 2s, 4s
-                            print(f"   Retrying in {wait_time} seconds...")
-                            time.sleep(wait_time)
-                        else:
-                            print(f"❌ DNS resolution failed after {max_retries} attempts")
-                            socket.setdefaulttimeout(original_timeout)
+#                    if 'name resolution' in error_str or 'name_not_resolved' in error_str or 'failed to resolve' in error_str:
+#                        print(f"⚠️ DNS resolution error (attempt {retry_count}/{max_retries})")
+#                        if retry_count < max_retries:
+#                            wait_time = retry_count * 2  # Exponential backoff: 2s, 4s
+#                            print(f"   Retrying in {wait_time} seconds...")
+#                            time.sleep(wait_time)
+#                        else:
+#                            print(f"❌ DNS resolution failed after {max_retries} attempts")
+#                            socket.setdefaulttimeout(original_timeout)
                             # Provide helpful error message
-                            guidance = """
-                            DNS resolution failure - cannot connect to Google OAuth servers.
+#                            guidance = """
+#                            DNS resolution failure - cannot connect to Google OAuth servers.
                             
-                            This may be due to:
-                            1. Network connectivity issues
-                            2. DNS server problems  
-                            3. Firewall blocking outbound connections
-                            4. VPN/proxy configuration issues
+#                            This may be due to:
+#                            1. Network connectivity issues
+#                            2. DNS server problems  
+#                            3. Firewall blocking outbound connections
+#                            4. VPN/proxy configuration issues
                             
-                            Please check your network connection and try again.
-                            If the problem persists, contact your network administrator.
-                            """
-                            response = make_response(render_template('error.html',
-                                              error_title='Network Error - DNS Resolution Failed',
-                                              error_message=f'Cannot resolve oauth2.googleapis.com: {str(network_error)}\n\n{guidance}'))
-                            response.status_code = 503
-                            return response
-                    else:
+#                            Please check your network connection and try again.
+#                            If the problem persists, contact your network administrator.
+#                            """
+#                            response = make_response(render_template('error.html',
+#                                              error_title='Network Error - DNS Resolution Failed',
+#                                              error_message=f'Cannot resolve oauth2.googleapis.com: {str(network_error)}\n\n{guidance}'))
+#                            response.status_code = 503
+#                            return response
+#                    else:
                         # Other network errors
-                        if retry_count < max_retries:
-                            wait_time = retry_count * 2
-                            print(f"⚠️ Network error (attempt {retry_count}/{max_retries}): {str(network_error)[:100]}")
-                            print(f"   Retrying in {wait_time} seconds...")
-                            time.sleep(wait_time)
-                        else:
-                            print(f"❌ Network error after {max_retries} attempts")
-                            socket.setdefaulttimeout(original_timeout)
-                            raise
+#                        if retry_count < max_retries:
+#                            wait_time = retry_count * 2
+#                            print(f"⚠️ Network error (attempt {retry_count}/{max_retries}): {str(network_error)[:100]}")
+#                            print(f"   Retrying in {wait_time} seconds...")
+#                            time.sleep(wait_time)
+#                        else:
+#                            print(f"❌ Network error after {max_retries} attempts")
+#                            socket.setdefaulttimeout(original_timeout)
+#                            raise
             
             # Restore original timeout
-            if 'original_timeout' in locals():
-                socket.setdefaulttimeout(original_timeout)
+#            if 'original_timeout' in locals():
+#                socket.setdefaulttimeout(original_timeout)
             
             # If we exhausted retries without success
-            if retry_count >= max_retries and last_error:
-                socket.setdefaulttimeout(original_timeout)
-                raise last_error
-        except Exception as token_error:
-            print(f"\n❌ Token fetch error: {str(token_error)}")
-            print(f"   Error type: {type(token_error).__name__}")
+#            if retry_count >= max_retries and last_error:
+#                socket.setdefaulttimeout(original_timeout)
+#                raise last_error
+#        except Exception as token_error:
+#            print(f"\n❌ Token fetch error: {str(token_error)}")
+#            print(f"   Error type: {type(token_error).__name__}")
             
             # Check for specific error types
-            error_str = str(token_error).lower()
-            error_type = type(token_error).__name__
+#            error_str = str(token_error).lower()
+#            error_type = type(token_error).__name__
             
             # Handle timeout errors
-            if 'timeout' in error_str or error_type == 'Timeout':
-                guidance = """
-                Connection timeout - cannot reach Google OAuth servers.
+#            if 'timeout' in error_str or error_type == 'Timeout':
+#                guidance = """
+#                Connection timeout - cannot reach Google OAuth servers.
                 
-                This usually means:
-                1. Network is unreachable or very slow
-                2. Firewall is blocking outbound HTTPS connections
-                3. DNS is not resolving oauth2.googleapis.com
+#                This usually means:
+#                1. Network is unreachable or very slow
+#                2. Firewall is blocking outbound HTTPS connections
+#                3. DNS is not resolving oauth2.googleapis.com
                 
-                Please check:
-                • Your internet connection
-                • Firewall/VPN settings  
-                • Try: ping oauth2.googleapis.com
+#                Please check:
+#                • Your internet connection
+#                • Firewall/VPN settings  
+#                • Try: ping oauth2.googleapis.com
                 
-                If the problem persists, contact your network administrator.
-                """
-                response = make_response(render_template('error.html',
-                                  error_title='Connection Timeout',
-                                  error_message=f'Request timed out: {str(token_error)}\n\n{guidance}'))
-                response.status_code = 504
-                return response
+#                If the problem persists, contact your network administrator.
+#                """
+#                response = make_response(render_template('error.html',
+#                                  error_title='Connection Timeout',
+#                                  error_message=f'Request timed out: {str(token_error)}\n\n{guidance}'))
+#                response.status_code = 504
+#                return response
             
             # Handle DNS/network errors
-            if 'name resolution' in error_str or 'name_not_resolved' in error_str or 'failed to resolve' in error_str:
-                guidance = """
-                DNS resolution failure - cannot connect to Google OAuth servers.
+#            if 'name resolution' in error_str or 'name_not_resolved' in error_str or 'failed to resolve' in error_str:
+#                guidance = """
+#                DNS resolution failure - cannot connect to Google OAuth servers.
                 
-                Please check:
-                1. Your network connection is active
-                2. DNS servers are reachable (try: nslookup oauth2.googleapis.com)
-                3. No firewall is blocking outbound HTTPS connections
-                4. VPN/proxy settings are correct
+#                Please check:
+#                1. Your network connection is active
+#                2. DNS servers are reachable (try: nslookup oauth2.googleapis.com)
+#                3. No firewall is blocking outbound HTTPS connections
+#                4. VPN/proxy settings are correct
                 
-                Try again in a few moments. If the problem persists, contact your network administrator.
-                """
-                response = make_response(render_template('error.html',
-                                  error_title='Network Error',
-                                  error_message=f'DNS resolution failed: {str(token_error)}\n\n{guidance}'))
-                response.status_code = 503
-                return response
+#                Try again in a few moments. If the problem persists, contact your network administrator.
+#                """
+#                response = make_response(render_template('error.html',
+#                                  error_title='Network Error',
+#                                  error_message=f'DNS resolution failed: {str(token_error)}\n\n{guidance}'))
+#                response.status_code = 503
+#                return response
             
             # Handle insecure transport error (HTTP instead of HTTPS)
-            if 'insecure_transport' in error_str or error_type == 'InsecureTransportError':
+#            if 'insecure_transport' in error_str or error_type == 'InsecureTransportError':
                 # Check if we're on localhost
-                if 'localhost' in REDIRECT_URI or '127.0.0.1' in REDIRECT_URI:
+#                if 'localhost' in REDIRECT_URI or '127.0.0.1' in REDIRECT_URI:
                     # This should not happen if OAUTHLIB_INSECURE_TRANSPORT is set correctly
-                    guidance = """
-                    OAuth requires HTTPS, but you're using HTTP on localhost.
+#                    guidance = """
+#                    OAuth requires HTTPS, but you're using HTTP on localhost.
                     
-                    The application should automatically enable insecure transport for localhost.
-                    If you see this error, please:
+#                    The application should automatically enable insecure transport for localhost.
+#                    If you see this error, please:
                     
-                    1. Ensure you're accessing via http://localhost:5000 (not https://)
-                    2. Restart the Flask server after any code changes
-                    3. Check that OAUTHLIB_INSECURE_TRANSPORT environment variable is set
+#                    1. Ensure you're accessing via http://localhost:5000 (not https://)
+#                    2. Restart the Flask server after any code changes
+#                    3. Check that OAUTHLIB_INSECURE_TRANSPORT environment variable is set
                     
-                    Note: For production, you MUST use HTTPS.
-                    """
-                    response = make_response(render_template('error.html',
-                                      error_title='HTTPS Required Error',
-                                      error_message=guidance))
-                    response.status_code = 500
-                    return response
-                else:
-                    guidance = """
-                    OAuth requires HTTPS for security. You're accessing the application via HTTP.
+#                    Note: For production, you MUST use HTTPS.
+#                    """
+#                    response = make_response(render_template('error.html',
+#                                      error_title='HTTPS Required Error',
+#                                      error_message=guidance))
+#                    response.status_code = 500
+#                    return response
+#                else:
+#                    guidance = """
+#                    OAuth requires HTTPS for security. You're accessing the application via HTTP.
                     
-                    Please access the application using HTTPS instead of HTTP.
-                    """
-                    response = make_response(render_template('error.html',
-                                      error_title='HTTPS Required',
-                                      error_message=guidance))
-                    response.status_code = 400
-                    return response
+#                    Please access the application using HTTPS instead of HTTP.
+#                    """
+#                    response = make_response(render_template('error.html',
+#                                      error_title='HTTPS Required',
+#                                      error_message=guidance))
+#                    response.status_code = 400
+#                    return response
             # Check for redirect URI mismatch in the error
-            elif 'redirect_uri_mismatch' in error_str or 'redirect_uri' in error_str:
-                guidance = f"""
-                The redirect URI does not match Google Cloud Console settings.
+#            elif 'redirect_uri_mismatch' in error_str or 'redirect_uri' in error_str:
+#                guidance = f"""
+#                The redirect URI does not match Google Cloud Console settings.
                 
-                Configured URI: {REDIRECT_URI}
+#                Configured URI: {REDIRECT_URI}
                 
-                Please verify in Google Cloud Console that this EXACT URI is listed
-                under "Authorized redirect URIs" (no trailing slash, correct protocol).
-                """
-                response = make_response(render_template('error.html',
-                                  error_title='Redirect URI Configuration Error',
-                                  error_message=guidance))
-                response.status_code = 400
-                return response
-            else:
-                raise  # Re-raise if it's a different error
+#                Please verify in Google Cloud Console that this EXACT URI is listed
+#                under "Authorized redirect URIs" (no trailing slash, correct protocol).
+#                """
+#                response = make_response(render_template('error.html',
+#                                  error_title='Redirect URI Configuration Error',
+#                                  error_message=guidance))
+#                response.status_code = 400
+#                return response
+#            else:
+#                raise  # Re-raise if it's a different error
         
         # Clear state from session after successful token exchange
-        session.pop('state', None)
+#        session.pop('state', None)
         
-        print("🔄 Verifying ID token and fetching user info...")
-        import time
-        start_time = time.time()
+#        print("🔄 Verifying ID token and fetching user info...")
+#        import time
+#        start_time = time.time()
         
-        credentials = flow.credentials
-        from google.oauth2 import id_token
-        from google.auth.transport import requests as google_requests
+#        credentials = flow.credentials
+#        from google.oauth2 import id_token
+#        from google.auth.transport import requests as google_requests
         
         # Verify and get user info
-        request_session = google_requests.Request()
-        idinfo = id_token.verify_oauth2_token(
-            credentials.id_token, request_session, CLIENT_ID)
+#        request_session = google_requests.Request()
+#        idinfo = id_token.verify_oauth2_token(
+#            credentials.id_token, request_session, CLIENT_ID)
         
-        elapsed = time.time() - start_time
-        print(f"✅ ID token verification completed in {elapsed:.2f} seconds")
+#        elapsed = time.time() - start_time
+#        print(f"✅ ID token verification completed in {elapsed:.2f} seconds")
         
-        email = idinfo.get('email')
-        name = idinfo.get('name', '')
-        user_id = idinfo.get('sub')
+#        email = idinfo.get('email')
+#        name = idinfo.get('name', '')
+#        user_id = idinfo.get('sub')
         
         # Check if email domain is allowed
-        if not email or not email.endswith(ALLOWED_DOMAIN):
-            response = make_response(render_template('error.html',
-                                  error_title='Access Denied',
-                                  error_message=f'Access is restricted to {ALLOWED_DOMAIN} email addresses. Your email ({email}) is not authorized.'))
-            response.status_code = 403
-            return response
+#        if not email or not email.endswith(ALLOWED_DOMAIN):
+#            response = make_response(render_template('error.html',
+#                                  error_title='Access Denied',
+#                                  error_message=f'Access is restricted to {ALLOWED_DOMAIN} email addresses. Your email ({email}) is not authorized.'))
+#            response.status_code = 403
+#            return response
         
         # Create user and log in
-        print(f"✅ User authenticated: {email} ({name})")
-        user = User(user_id, email, name)
-        session['user_id'] = user_id
-        session['user_email'] = email
-        session['user_name'] = name
-        login_user(user)
+#        print(f"✅ User authenticated: {email} ({name})")
+#        user = User(user_id, email, name)
+#        session['user_id'] = user_id
+#        session['user_email'] = email
+#        session['user_name'] = name
+#        login_user(user)
         
-        print("✅ Login successful, redirecting to dashboard...")
-        return redirect(url_for('index'))
+#        print("✅ Login successful, redirecting to dashboard...")
+#        return redirect(url_for('index'))
     
-    except Exception as e:
-        import traceback
-        error_details = traceback.format_exc()
-        print(f"OAuth callback error: {str(e)}")
-        print(f"Error traceback: {error_details}")
+#    except Exception as e:
+#        import traceback
+#        error_details = traceback.format_exc()
+#        print(f"OAuth callback error: {str(e)}")
+#        print(f"Error traceback: {error_details}")
         
         # Provide more specific error messages
-        error_message = str(e)
-        if 'redirect_uri_mismatch' in error_message.lower() or 'redirect_uri' in error_message.lower():
-            error_message = f'Redirect URI mismatch. Configured: {REDIRECT_URI}. Please ensure this exact URL is added in Google Cloud Console under Authorized redirect URIs.'
-        elif 'invalid_grant' in error_message.lower():
-            error_message = 'Invalid authorization code. This may happen if the code was already used or expired. Please try logging in again.'
-        elif 'invalid_client' in error_message.lower():
-            error_message = 'Invalid OAuth client. Please check your GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET in the .env file.'
+#        error_message = str(e)
+#        if 'redirect_uri_mismatch' in error_message.lower() or 'redirect_uri' in error_message.lower():
+#            error_message = f'Redirect URI mismatch. Configured: {REDIRECT_URI}. Please ensure this exact URL is added in Google Cloud Console under Authorized redirect URIs.'
+#        elif 'invalid_grant' in error_message.lower():
+#            error_message = 'Invalid authorization code. This may happen if the code was already used or expired. Please try logging in again.'
+#        elif 'invalid_client' in error_message.lower():
+#            error_message = 'Invalid OAuth client. Please check your GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET in the .env file.'
         
-        response = make_response(render_template('error.html',
-                              error_title='Authentication Error',
-                              error_message=f'An error occurred during authentication: {error_message}'))
-        response.status_code = 500
-        return response
+#        response = make_response(render_template('error.html',
+#                              error_title='Authentication Error',
+#                              error_message=f'An error occurred during authentication: {error_message}'))
+#        response.status_code = 500
+#        return response
 
 @app.route('/logout')
 @login_required
@@ -1223,6 +1255,7 @@ def index():
     """Main dashboard page"""
     filter_options = get_filter_options()
     # Initial load with recent data only (last 3 months) for better performance
+    # Note: get_monthly_data will use default 90 days if date='all', but we explicitly set it here for clarity
     end_date = datetime.now().strftime('%Y-%m-%d')
     start_date = (datetime.now() - timedelta(days=90)).strftime('%Y-%m-%d')
     monthly_data = get_monthly_data('all', 'all', 'all', f'{start_date},{end_date}')
@@ -1309,14 +1342,18 @@ def api_charts():
         # Flask's request.args automatically decodes '+' to spaces, but unquote handles % encoding
         escalation = unquote(str(escalation)).strip()
         
+        # Normalize escalation value for comparison (handle any encoding issues)
+        escalation_normalized = escalation.strip()
+        
         # Debug logging
         print(f"\n=== API CHARTS DEBUG ===")
         print(f"Received params - escalation: '{escalation}' (type: {type(escalation).__name__}, length: {len(escalation)}), email: '{email}', hospital: '{str(hospital)[:100]}...', date: '{date}', exclude_camera: {exclude_camera}")
-        print(f"Escalation comparison - == 'all': {escalation == 'all'}, == 'Camera Annotation Events': {escalation == 'Camera Annotation Events'}, == 'Impact Cases': {escalation == 'Impact Cases'}, == 'Educating nurses': {escalation == 'Educating nurses'}, != 'all': {escalation != 'all'}")
-        print(f"Escalation repr: {repr(escalation)}")
+        print(f"Escalation normalized: '{escalation_normalized}'")
+        print(f"Escalation comparison - == 'all': {escalation_normalized == 'all'}, == 'Camera Annotation Events': {escalation_normalized == 'Camera Annotation Events'}, == 'Impact Cases': {escalation_normalized == 'Impact Cases'}, == 'Educating nurses': {escalation_normalized == 'Educating nurses'}, != 'all': {escalation_normalized != 'all'}")
+        print(f"Escalation repr: {repr(escalation_normalized)}")
         
         # If exclude_camera is True and escalation is Camera Annotation Events, return empty charts
-        if escalation == 'Camera Annotation Events' and exclude_camera:
+        if escalation_normalized == 'Camera Annotation Events' and exclude_camera:
             print("DEBUG: Camera Annotation Events excluded - returning empty charts")
             empty_chart = json.dumps({
                 'data': [],
@@ -1333,13 +1370,13 @@ def api_charts():
                 'nurse_wise_trend': empty_chart
             })
         
-        if escalation == 'Camera Annotation Events':
+        if escalation_normalized == 'Camera Annotation Events':
             print("DEBUG: api_charts - Branch: Camera Annotation Events")
             # Create specialized camera events charts
-            camera_dist = create_camera_events_charts(escalation, email, hospital, date)
+            camera_dist = create_camera_events_charts(escalation_normalized, email, hospital, date)
             
             # Get monthly trend data
-            monthly_data = get_monthly_data(escalation, email, hospital, date, exclude_camera=exclude_camera)
+            monthly_data = get_monthly_data(escalation_normalized, email, hospital, date, exclude_camera=exclude_camera)
             monthly_trend = create_monthly_trend_chart(monthly_data)
             
             # Create nurse-wise month-on-month trend chart
@@ -1350,10 +1387,10 @@ def api_charts():
                 'escalation_dist': camera_dist,
                 'nurse_wise_trend': nurse_wise_trend
             })
-        elif escalation == 'Educating nurses':
+        elif escalation_normalized == 'Educating nurses':
             print("DEBUG: api_charts - Branch: Educating nurses")
             # Get monthly trend data
-            monthly_data = get_monthly_data(escalation, email, hospital, date, exclude_camera=exclude_camera)
+            monthly_data = get_monthly_data(escalation_normalized, email, hospital, date, exclude_camera=exclude_camera)
             monthly_trend = create_monthly_trend_chart(monthly_data)
             
             # Create escalation distribution chart
@@ -1367,13 +1404,13 @@ def api_charts():
                 'escalation_dist': escalation_dist,
                 'nurse_wise_trend': nurse_wise_trend
             })
-        elif escalation == 'Impact Cases':
+        elif escalation_normalized == 'Impact Cases':
             print("DEBUG: api_charts - Branch: Impact Cases")
             # Create specialized impact cases charts
-            impact_dist = create_impact_cases_charts(escalation, email, hospital, date)
+            impact_dist = create_impact_cases_charts(escalation_normalized, email, hospital, date)
             
             # Get monthly trend data
-            monthly_data = get_monthly_data(escalation, email, hospital, date, exclude_camera=exclude_camera)
+            monthly_data = get_monthly_data(escalation_normalized, email, hospital, date, exclude_camera=exclude_camera)
             monthly_trend = create_monthly_trend_chart(monthly_data)
             
             return jsonify({
@@ -1381,8 +1418,8 @@ def api_charts():
                 'escalation_dist': impact_dist
             })
         else:
-            print(f"DEBUG: api_charts - Branch: else (escalation='{escalation}')")
-            monthly_data = get_monthly_data(escalation, email, hospital, date, exclude_camera=exclude_camera)
+            print(f"DEBUG: api_charts - Branch: else (escalation='{escalation_normalized}')")
+            monthly_data = get_monthly_data(escalation_normalized, email, hospital, date, exclude_camera=exclude_camera)
             
             # Debug: Check what escalation types are in the data
             if not monthly_data.empty:
@@ -2094,25 +2131,32 @@ def create_monthly_trend_chart(monthly_data):
         )
         return json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
     
-    # Sort data by year and month first
-    monthly_data_sorted = monthly_data.sort_values(['year', 'month']).copy()
+    # Ensure date column is datetime type
+    monthly_data['date'] = pd.to_datetime(monthly_data['date'])
+    monthly_data_sorted = monthly_data.sort_values('date').copy()
     
-    # Pivot data for chart
+    # Pivot data for chart using date as index (already monthly aggregated)
     pivot_data = monthly_data_sorted.pivot_table(
-        index=['year', 'month'], 
+        index='date', 
         columns='escalation_observation', 
         values='count', 
         fill_value=0,
         aggfunc='sum'
     ).reset_index()
     
-    # Sort pivot data by year and month
-    pivot_data = pivot_data.sort_values(['year', 'month'])
+    # Sort pivot data by date
+    pivot_data = pivot_data.sort_values('date')
     
-    # Create month labels
-    pivot_data['month_label'] = pivot_data.apply(
-        lambda x: f"{int(x['year'])}-{int(x['month']):02d}", axis=1
-    )
+    # Get all unique dates (these are now month-start dates)
+    dates_list = pivot_data['date'].tolist()
+    
+    # Create month labels for x-axis ticks
+    month_names = ['', 'January', 'February', 'March', 'April', 'May', 'June', 
+                   'July', 'August', 'September', 'October', 'November', 'December']
+    
+    # Since dates are already month-start dates, create labels directly
+    month_starts = dates_list
+    month_labels = [f"{month_names[date.month]} {date.year}" for date in dates_list]
     
     traces = []
     # Extended color palette with variations of base colors and complementary colors
@@ -2148,14 +2192,12 @@ def create_monthly_trend_chart(monthly_data):
     marker_symbols = ['circle', 'square', 'diamond', 'triangle-up', 'triangle-down', 
                      'pentagon', 'hexagon', 'star', 'cross', 'x']
     
-    # Get escalation columns (exclude year, month, month_label)
-    escalation_columns = [col for col in pivot_data.columns if col not in ['year', 'month', 'month_label']]
+    # Get escalation columns (exclude date)
+    escalation_columns = [col for col in pivot_data.columns if col != 'date']
     
     # Collect all values for SD and median calculation across all escalations
     import numpy as np
-    all_values_by_month = {}
-    for month in pivot_data['month_label']:
-        all_values_by_month[month] = []
+    all_values = []
     
     for i, escalation in enumerate(escalation_columns):
         color = colors[i % len(colors)]
@@ -2170,27 +2212,18 @@ def create_monthly_trend_chart(monthly_data):
         if line_style != 'solid':
             line_dict['dash'] = line_style
         
-        # Collect values for SD/median calculation
-        for idx, month in enumerate(pivot_data['month_label']):
-            all_values_by_month[month].append(pivot_data[escalation].iloc[idx])
+        # Get values for this escalation
+        escalation_values = pivot_data[escalation].tolist()
+        all_values.extend([v for v in escalation_values if v > 0])  # Exclude zeros for global calculation
         
         traces.append(go.Scatter(
-            x=pivot_data['month_label'],
-            y=pivot_data[escalation],
+            x=pivot_data['date'],
+            y=escalation_values,
             mode='lines+markers',
             name=escalation,
             line=line_dict,
             marker=dict(size=7, symbol=marker_symbol)
         ))
-    
-    # Calculate median and +3 SD across all escalations and all months for the entire period
-    months_list = pivot_data['month_label'].tolist()
-    
-    # Collect all values across all months and all escalations for global calculation
-    all_values = []
-    for month in months_list:
-        values = [v for v in all_values_by_month[month] if v > 0]  # Exclude zeros
-        all_values.extend(values)
     
     # Calculate single global median and +3 SD for entire period
     if len(all_values) > 0:
@@ -2202,28 +2235,28 @@ def create_monthly_trend_chart(monthly_data):
         global_median = 0
         global_sd_3 = 0
     
-    # Create constant values for horizontal lines across all months
-    median_values = [global_median] * len(months_list)
-    sd_3_values = [global_sd_3] * len(months_list)
+    # Create constant values for horizontal lines across all dates
+    median_values = [global_median] * len(dates_list)
+    sd_3_values = [global_sd_3] * len(dates_list)
     
     # Add median line (horizontal constant value)
     traces.append(go.Scatter(
-        x=months_list,
+        x=dates_list,
         y=median_values,
         mode='lines',
         name='Median',
         line=dict(color='red', width=2.5, dash='dash'),
-        hovertemplate='<b>Median</b><br>Month: %{x}<br>Value: %{y:.2f}<extra></extra>'
+        hovertemplate='<b>Median</b><br>Date: %{x}<br>Value: %{y:.2f}<extra></extra>'
     ))
     
     # Add +3 SD line (horizontal constant value)
     traces.append(go.Scatter(
-        x=months_list,
+        x=dates_list,
         y=sd_3_values,
         mode='lines',
         name='+3 SD',
         line=dict(color='orange', width=2.5, dash='dot'),
-        hovertemplate='<b>+3 SD</b><br>Month: %{x}<br>Value: %{y:.2f}<extra></extra>'
+        hovertemplate='<b>+3 SD</b><br>Date: %{x}<br>Value: %{y:.2f}<extra></extra>'
     ))
     
     fig = go.Figure(data=traces)
@@ -2235,7 +2268,12 @@ def create_monthly_trend_chart(monthly_data):
             showgrid=True,
             gridcolor='lightgray',
             gridwidth=1,
-            zeroline=False
+            zeroline=False,
+            type='date',
+            tickmode='array',
+            tickvals=month_starts,
+            ticktext=month_labels,
+            tickformat='%B %Y'
         ),
         yaxis=dict(
             title='Number of Escalations',
